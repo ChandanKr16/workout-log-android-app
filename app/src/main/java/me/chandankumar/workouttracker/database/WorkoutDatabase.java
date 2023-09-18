@@ -9,9 +9,9 @@ import androidx.room.TypeConverters;
 
 import me.chandankumar.workouttracker.dao.ExerciseDao;
 import me.chandankumar.workouttracker.dao.RepInfoDao;
+import me.chandankumar.workouttracker.dao.WeightLogDao;
 import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.domain.RepInfo;
-import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.domain.WeightLog;
 import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.Converters;
@@ -36,6 +36,8 @@ public abstract class WorkoutDatabase extends RoomDatabase {
     public abstract ExerciseDao exerciseDao();
 
     public abstract RepInfoDao repInfoDao();
+
+    public abstract WeightLogDao weightLogDao();
 
 
 

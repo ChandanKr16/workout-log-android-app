@@ -15,47 +15,62 @@ import java.util.List;
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
-import me.chandankumar.workouttracker.domain.RepInfo;
+import me.chandankumar.workouttracker.domain.WeightLog;
 import me.chandankumar.workouttracker.utils.AlertDialogBuilder;
 import me.chandankumar.workouttracker.utils.Constants;
 
 public class WeightLogAdapter extends RecyclerView.Adapter<WeightLogAdapter.ViewHolder> {
 
     private Activity activity;
-    private List<RepInfo> repInfoList;
+    private List<WeightLog> weightLogList;
     private WorkoutDatabase workoutDatabase;
 
-    public WeightLogAdapter(Activity activity, List<RepInfo> repInfoList, WorkoutDatabase workoutDatabase) {
+    public WeightLogAdapter(Activity activity, List<WeightLog> weightLogList, WorkoutDatabase workoutDatabase) {
         this.activity = activity;
-        this.repInfoList = repInfoList;
+        this.weightLogList = weightLogList;
         this.workoutDatabase = workoutDatabase;
     }
 
-    public void refresh(List<RepInfo> reps){
-        repInfoList.clear();
-        repInfoList.addAll(reps);
+    public void refresh(List<WeightLog> logs){
+        weightLogList.clear();
+        weightLogList.addAll(logs);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rep_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.weight_log_item, parent, false);
         return new WeightLogAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.dateTextView.setText("" + repInfoList.get(position).getWeight() + " Kg × " + repInfoList.get(position).getRep());
+
+        float gain =  weightLogList.get(position).getGain();
+
+        holder.dateTextView.setText("" + weightLogList.get(position).getDate());
+        holder.weightTextView.setText("" + weightLogList.get(position).getWeight());
+        holder.gainTextView.setText("" + gain);
+
+        if(gain >= 0){
+            holder.gainImageView.setImageResource(R.drawable.ic_baseline_arrow_upward_24);
+        }
+        else{
+            holder.gainImageView.setImageResource(R.drawable.ic_baseline_arrow_downward_24);
+        }
+
+
+
 
         holder.deleteImageView.setOnClickListener(view -> {
 
             AlertDialogBuilder.getConfirmAlertDialog(activity, "Delete", "Are you sure you want to delete this log?")
                             .setPositiveButton(Constants.YES, (dialogInterface, i) ->
                                     AppExecutors.getInstance().diskIO().execute(() -> {
-                                        workoutDatabase.repInfoDao().delete(repInfoList.get(position));
-                                        List<RepInfo> repInfos = workoutDatabase.repInfoDao().getAllByDateAndExerciseId(repInfoList.get(position).getDate(), repInfoList.get(position).getExerciseId());
-                                        activity.runOnUiThread(() -> refresh(repInfos));
+                                        workoutDatabase.weightLogDao().delete(weightLogList.get(position));
+                                        List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
+                                        activity.runOnUiThread(() -> refresh(logs));
 
                                     }))
                             .setNegativeButton(Constants.NO, (dialogInterface, i) -> dialogInterface.dismiss()).show();
@@ -68,7 +83,7 @@ public class WeightLogAdapter extends RecyclerView.Adapter<WeightLogAdapter.View
 
     @Override
     public int getItemCount() {
-        return repInfoList.size();
+        return weightLogList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

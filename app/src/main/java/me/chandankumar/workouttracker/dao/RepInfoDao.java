@@ -8,9 +8,7 @@ import androidx.room.Update;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.TotalVolume;
 

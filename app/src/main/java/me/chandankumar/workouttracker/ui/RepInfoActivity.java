@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -28,7 +27,6 @@ import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.adapter.RepInfoAdapter;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
-import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.utils.Constants;
 

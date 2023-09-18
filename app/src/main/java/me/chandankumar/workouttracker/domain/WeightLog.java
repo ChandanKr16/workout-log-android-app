@@ -26,9 +26,6 @@ public class WeightLog {
     @ColumnInfo(name = "gain")
     private float gain;
 
-
-
-
     public WeightLog() {
     }
 
