@@ -44,6 +44,8 @@ dependencies {
     implementation 'de.raphaelebner:roomdatabasebackup:1.0.0-beta11'
     implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.27'
+
 
 
 

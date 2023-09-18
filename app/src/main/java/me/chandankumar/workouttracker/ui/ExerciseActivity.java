@@ -26,6 +26,7 @@ import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.utils.BodyParts;
 import me.chandankumar.workouttracker.utils.Constants;
+import pl.droidsonroids.gif.GifImageView;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private WorkoutDatabase workoutDatabase;
     private ExerciseAdapter exerciseAdapter;
     private int bodyPartId;
-    private ImageView emptyImg;
+    private GifImageView emptyImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

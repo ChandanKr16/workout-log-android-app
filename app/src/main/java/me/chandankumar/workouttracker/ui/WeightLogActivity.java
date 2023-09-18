@@ -49,14 +49,14 @@ public class WeightLogActivity extends AppCompatActivity {
 
         AppExecutors.getInstance().diskIO().execute(() -> {
 
-
-
             List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
 
-            weightLogAdapter = new WeightLogAdapter(this, logs, workoutDatabase);
-            weightLogRecyclerView.setHasFixedSize(true);
-            weightLogRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            weightLogRecyclerView.setAdapter(weightLogAdapter);
+            runOnUiThread(() -> {
+                weightLogAdapter = new WeightLogAdapter(WeightLogActivity.this, logs, workoutDatabase);
+                weightLogRecyclerView.setHasFixedSize(true);
+                weightLogRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                weightLogRecyclerView.setAdapter(weightLogAdapter);
+            });
 
         });
     }
@@ -75,12 +75,16 @@ public class WeightLogActivity extends AppCompatActivity {
                 return true;
             case R.id.chart_menu_item:
 
-
+                showWeightLogGraphActivity();
 
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void showWeightLogGraphActivity() {
+        startActivity(new Intent(getApplicationContext(), WeightLogGraphActivity.class));
     }
 
     private void showAddWeightLogDialog() {
@@ -99,43 +103,56 @@ public class WeightLogActivity extends AppCompatActivity {
 
 
         Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+
         positiveButton.setOnClickListener(view -> {
-
-            String weight = weightEditText.getText().toString().trim();
-
-            if(weight.isEmpty()){
-                weightEditText.setError("Weight cannot be empty");
-                return;
-            }
-
-
-
 
             AppExecutors.getInstance().diskIO().execute(() -> {
 
+                Date today = new Date();
+                int year1 = today.getYear();
+                int month1 = today.getMonth();
+                int day1 = today.getDate();
+                Date today1 = new Date(year1, month1, day1);
 
-                float lastWeightLog = 0f;
-
-                if(workoutDatabase.weightLogDao().getLatestWeight() != null)
-                    lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
+                if(workoutDatabase.weightLogDao().getTodayWeightLog(today1) == null) {
 
 
-                Date date = new Date();
-                int year = date.getYear();
-                int month = date.getMonth();
-                int day = date.getDate();
-                Date toBeSaved = new Date(year, month, day);
 
-                float gain = Float.parseFloat(weight) - lastWeightLog;
+                    String weight = weightEditText.getText().toString().trim();
 
-                workoutDatabase.weightLogDao().save(new WeightLog(toBeSaved, Float.parseFloat(weight), gain));
+                    if(weight.isEmpty()){
+                        weightEditText.setError("Weight cannot be empty");
+                        return;
+                    }
 
-                List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
-                runOnUiThread(() -> weightLogAdapter.refresh(logs));
 
-                alertDialog.dismiss();
 
-            });
+
+                    AppExecutors.getInstance().diskIO().execute(() -> {
+
+
+                        float lastWeightLog = 0f;
+
+                        if(workoutDatabase.weightLogDao().getLatestWeight() != null)
+                            lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
+
+
+                        Date date = new Date();
+                        int year = date.getYear();
+                        int month = date.getMonth();
+                        int day = date.getDate();
+                        Date toBeSaved = new Date(year, month, day);
+
+                        float gain = Float.parseFloat(weight) - lastWeightLog;
+
+                        workoutDatabase.weightLogDao().save(new WeightLog(toBeSaved, Float.parseFloat(weight), gain));
+
+                        List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
+                        runOnUiThread(() -> weightLogAdapter.refresh(logs));
+
+                        alertDialog.dismiss();
+                });
+                }});
         });
     }
 

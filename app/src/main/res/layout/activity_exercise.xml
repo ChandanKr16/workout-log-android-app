@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:layout_gravity="center"
             android:src="@drawable/empty"
             android:id="@+id/empty_img"

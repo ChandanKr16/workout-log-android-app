@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
 import me.chandankumar.workouttracker.domain.RepInfo;
@@ -19,6 +20,10 @@ public interface WeightLogDao {
 
     @Query("SELECT * FROM WeightLog ORDER BY date DESC LIMIT 1")
     WeightLog getLatestWeight();
+
+
+    @Query("SELECT * FROM WeightLog WHERE date=:date")
+    WeightLog getTodayWeightLog(Date date);
 
     @Insert
     void save(WeightLog weightLog);
