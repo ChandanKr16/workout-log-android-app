@@ -12,10 +12,11 @@ import me.chandankumar.workouttracker.dao.RepInfoDao;
 import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.TotalVolume;
+import me.chandankumar.workouttracker.domain.WeightLog;
 import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.Converters;
 
-@Database(entities = {Exercise.class, RepInfo.class}, exportSchema = false, version = 1)
+@Database(entities = {Exercise.class, RepInfo.class, WeightLog.class}, exportSchema = false, version = 1)
 @TypeConverters({Converters.class})
 public abstract class WorkoutDatabase extends RoomDatabase {
 
@@ -35,5 +36,7 @@ public abstract class WorkoutDatabase extends RoomDatabase {
     public abstract ExerciseDao exerciseDao();
 
     public abstract RepInfoDao repInfoDao();
+
+
 
 }
