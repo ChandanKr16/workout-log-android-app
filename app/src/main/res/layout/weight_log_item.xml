@@ -26,7 +26,7 @@
 
 
         <TextView
-            android:id="@+id/rep_info_textview"
+            android:id="@+id/date_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/weight_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -65,11 +65,11 @@
             android:textColor="#000"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rep_info_textview"
+            app:layout_constraintStart_toEndOf="@+id/date_textview"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/gain_textview"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -79,30 +79,21 @@
             android:textColor="#000"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/weight_textview"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/gain_imageview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/gain_textview"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
 
-        <!--        <TextView-->
-        <!--            android:textAlignment="textEnd"-->
-        <!--            android:padding="8dp"-->
-        <!--            android:layout_marginTop="8dp"-->
-        <!--            android:textSize="22dp"-->
-        <!--            android:textColor="#000"-->
-        <!--            android:text="Reps: 10"-->
-        <!--            android:id="@+id/rep_reps"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"/>-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,14 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.Date;
 import java.util.List;
 
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.domain.RepInfo;
-import me.chandankumar.workouttracker.ui.RepInfoActivity;
 import me.chandankumar.workouttracker.utils.AlertDialogBuilder;
 import me.chandankumar.workouttracker.utils.Constants;
 
@@ -136,7 +133,7 @@ public class RepInfoAdapter extends RecyclerView.Adapter<RepInfoAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            repInfoTextView = itemView.findViewById(R.id.rep_info_textview);
+            repInfoTextView = itemView.findViewById(R.id.date_textview);
             editImageView = itemView.findViewById(R.id.edit_imageview);
             deleteImageView = itemView.findViewById(R.id.delete_imageview);
 
