@@ -49,9 +49,11 @@ public class WeightLogAdapter extends RecyclerView.Adapter<WeightLogAdapter.View
 
         float gain =  weightLogList.get(position).getGain();
 
-        holder.dateTextView.setText("" + weightLogList.get(position).getDate());
-        holder.weightTextView.setText("" + weightLogList.get(position).getWeight());
-        holder.gainTextView.setText("" + gain);
+        String date = weightLogList.get(position).getDate().getDate() + "-" + (weightLogList.get(position).getDate().getMonth()+1) + "-" + (weightLogList.get(position).getDate().getYear()+1900);
+
+        holder.dateTextView.setText(date);
+        holder.weightTextView.setText("" + weightLogList.get(position).getWeight() + " Kg");
+        holder.gainTextView.setText("" + gain + " Kg");
 
         if(gain >= 0){
             holder.gainImageView.setImageResource(R.drawable.ic_baseline_arrow_upward_24);

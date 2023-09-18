@@ -17,6 +17,9 @@ public interface WeightLogDao {
     @Query("SELECT * FROM WeightLog ORDER BY date DESC")
     List<WeightLog> getAll();
 
+    @Query("SELECT * FROM WeightLog ORDER BY date DESC LIMIT 1")
+    WeightLog getLatestWeight();
+
     @Insert
     void save(WeightLog weightLog);
 

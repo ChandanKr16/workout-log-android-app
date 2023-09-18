@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/weight_log"
+        android:visible="true"
+        android:title="Weight Log" />
+
     <item android:id="@+id/backup_db"
         android:visible="true"
         android:title="Backup" />
@@ -9,5 +13,7 @@
     <item android:id="@+id/restore_db"
         android:visible="true"
         android:title="Restore" />
+
+
 
 </menu>

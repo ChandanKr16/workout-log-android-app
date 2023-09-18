@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WorkoutTracker"
         tools:targetApi="31">
         <activity
-            android:name=".WeightLogActivity"
+            android:name=".ui.WeightLogActivity"
             android:exported="false" />
 
         <service

@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.weight_log:
+                showWeightLogActivity();
+                return true;
+
             case R.id.backup_db:
                 backup();
                 return true;
@@ -95,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void showWeightLogActivity() {
+        startActivity(new Intent(MainActivity.this, WeightLogActivity.class));
     }
 
     private void backup(){
