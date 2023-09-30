@@ -126,8 +126,6 @@ public class WeightLogActivity extends AppCompatActivity {
                     }
 
 
-
-
                     AppExecutors.getInstance().diskIO().execute(() -> {
 
 
@@ -144,6 +142,8 @@ public class WeightLogActivity extends AppCompatActivity {
                         Date toBeSaved = new Date(year, month, day);
 
                         float gain = Float.parseFloat(weight) - lastWeightLog;
+
+                        gain = (float) ((float) Math.round(gain * 100.0) / 100.0);
 
                         workoutDatabase.weightLogDao().save(new WeightLog(toBeSaved, Float.parseFloat(weight), gain));
 
