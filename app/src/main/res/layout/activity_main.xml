@@ -3,14 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background = "@drawable/background_img"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:id="@+id/animation_view"
+            app:lottie_rawRes="@raw/animation_ln5l9u2c"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Muscle Group"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#fff" />
 
         <androidx.cardview.widget.CardView
             android:onClick="showBicepExerciseListActivity"
@@ -23,6 +43,16 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
                 android:src="@drawable/biceps"
                 android:layout_width="64dp"
@@ -32,7 +62,7 @@
                 android:textColor="#000"
                 android:textSize="22dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginLeft="74dp"
+                android:layout_marginLeft="80dp"
                 android:text="Biceps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -51,8 +81,18 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
-                android:src="@drawable/chest3"
+                android:src="@drawable/chest"
                 android:layout_width="64dp"
                 android:layout_height="64dp"/>
 
@@ -80,8 +120,18 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
-                android:src="@drawable/liposuction"
+                android:src="@drawable/tricep"
                 android:layout_width="64dp"
                 android:layout_height="64dp"/>
 
@@ -110,6 +160,16 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
                 android:src="@drawable/back"
                 android:layout_width="64dp"
@@ -139,6 +199,16 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
                 android:src="@drawable/shoulders"
                 android:layout_width="64dp"
@@ -168,8 +238,18 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
-                android:src="@drawable/abs"
+                android:src="@drawable/abdominal"
                 android:layout_width="64dp"
                 android:layout_height="64dp"/>
 
@@ -196,6 +276,16 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
                 android:src="@drawable/forearm"
                 android:layout_width="64dp"
@@ -225,6 +315,16 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="8dp"
+                android:layout_height="64dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_marginLeft="12dp"
                 android:padding="8dp"
                 android:src="@drawable/leg"
                 android:layout_width="64dp"
