@@ -14,9 +14,14 @@
         android:theme="@style/Theme.WorkoutTracker"
         tools:targetApi="31">
         <activity
+            android:theme="@style/AppTheme"
+            android:name=".ui.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.WeightLogGraphActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/AppTheme"
             android:name=".ui.WeightLogActivity"
             android:exported="false" />
 
@@ -34,6 +39,7 @@
             android:name=".ui.ExerciseActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/AppTheme"
             android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
