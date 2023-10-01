@@ -6,6 +6,8 @@
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/bacground_img.xml" value="0.223" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/background_img.xml" value="0.223" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_add_black_24dp.xml" value="0.223" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_add_white_24dp.xml" value="0.195" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2005" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_baseline_bar_chart_24.xml" value="0.1435" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -13,7 +15,7 @@
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/ic_undraw_fitness_stats_sht6.xml" value="0.1435" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/rectangle.xml" value="0.176" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/drawable/splash_background.xml" value="0.1435" />
-        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/activity_exercise.xml" value="0.25" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/activity_exercise.xml" value="0.2" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/activity_progress.xml" value="0.2" />

@@ -5,10 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_img"
     tools:context=".ui.ExerciseActivity">
+
+    <TextView
+       android:paddingTop="8dp"
+        android:textColor="#fff"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Bicep - Exercise "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <FrameLayout
+        android:layout_marginTop="40dp"
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,7 +44,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     </FrameLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:onClick="showAddExerciseDialog"
+        android:id="@+id/add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add_white_24dp"
+        app:fabSize="normal"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 <!--    <Button-->
 <!--        android:layout_margin="16dp"-->

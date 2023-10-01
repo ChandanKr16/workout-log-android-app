@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WorkoutTracker"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
             android:theme="@style/AppTheme"
@@ -36,6 +36,7 @@
             android:name=".ui.RepInfoActivity"
             android:exported="false" />
         <activity
+            android:theme="@style/AppTheme"
             android:name=".ui.ExerciseActivity"
             android:exported="false" />
         <activity

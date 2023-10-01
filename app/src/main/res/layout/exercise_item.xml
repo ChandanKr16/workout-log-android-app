@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    app:cardBackgroundColor="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/exercise_name_card"
     android:layout_marginTop="16dp"
@@ -8,7 +9,7 @@
     android:elevation="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp">
+    android:layout_height="64dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="8dp"
-            android:layout_height="48dp"
+            android:layout_height="64dp"
             android:src="@drawable/rectangle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
             android:padding="8dp"
             android:text="Bicep Curls"
             android:textColor="#000"
-            android:textSize="16dp"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_edit_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
             android:src="@drawable/ic_baseline_delete_24"
             app:layout_constraintEnd_toStartOf="@+id/edit_imageview"

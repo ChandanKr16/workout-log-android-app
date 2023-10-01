@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private ExerciseAdapter exerciseAdapter;
     private int bodyPartId;
     private GifImageView emptyImg;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,9 @@ public class ExerciseActivity extends AppCompatActivity {
     private void initView(){
         exerciseRecyclerview = findViewById(R.id.exercise_recyclerview);
         emptyImg = findViewById(R.id.empty_img);
+        floatingActionButton = findViewById(R.id.add_fab);
+       // floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+
     }
 
 
@@ -81,7 +87,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
     }
 
-    private void showAddExerciseDialog(){
+    public void showAddExerciseDialog(View view1){
         View viewInflated = LayoutInflater.from(getApplicationContext()).inflate(R.layout.exercise_input_dialog, null , false);
 
         final EditText exerciseNameEditText = viewInflated.findViewById(R.id.exercise_name);
@@ -119,20 +125,20 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_exercise_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_exercise_menu_item:
-                showAddExerciseDialog();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.add_exercise_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.add_exercise_menu_item:
+//                showAddExerciseDialog();
+//                return true;
+//            default:
+//                return super.onContextItemSelected(item);
+//        }
+//    }
 }
