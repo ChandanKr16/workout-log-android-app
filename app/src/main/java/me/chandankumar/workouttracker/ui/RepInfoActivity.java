@@ -18,6 +18,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import java.util.Date;
@@ -38,6 +39,7 @@ public class RepInfoActivity extends AppCompatActivity {
     private int bodyPartId;
     private RepInfoAdapter repInfoAdapter;
     private CalendarView workoutCalendarView;
+    private FloatingActionButton repInfoFAB;
 
 
 
@@ -58,6 +60,24 @@ public class RepInfoActivity extends AppCompatActivity {
     public void initViews(){
         repInfoRecyclerview = findViewById(R.id.rep_info_recyclerview);
         workoutCalendarView = findViewById(R.id.workout_calendarview);
+
+        repInfoFAB = findViewById(R.id.add_rep_info_button);
+
+//        repInfoRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                if (dy > 0 || dy < 0 && repInfoFAB.isShown())
+//                    repInfoFAB.hide();
+//            }
+//
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE)
+//                    repInfoFAB.show();
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//        });
 
         workoutCalendarView.setFirstDayOfWeek(2);
 
@@ -157,29 +177,32 @@ public class RepInfoActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_rep_menu, menu);
-        return true;
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.add_rep_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.add_exercise_menu_item:
+//                showAddRepDialog();
+//                return true;
+//            case R.id.chart_menu_item:
+//
+//                Intent intent = new Intent(getApplicationContext(), ProgressActivity.class);
+//                intent.putExtra("exerciseId", exerciseId);
+//                startActivity(intent);
+//
+//                return true;
+//            default:
+//                return super.onContextItemSelected(item);
+//        }
+//    }
+
+
+    public void showAddRepInfoDialog(View view) {
+        showAddRepDialog();
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.add_exercise_menu_item:
-                showAddRepDialog();
-                return true;
-            case R.id.chart_menu_item:
-
-                Intent intent = new Intent(getApplicationContext(), ProgressActivity.class);
-                intent.putExtra("exerciseId", exerciseId);
-                startActivity(intent);
-
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
-
-
 }
