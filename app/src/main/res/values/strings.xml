@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Workout Log</string>
+    <string-array name="muscle_group_array">
+      <item>Bicep</item>
+        <item>Chest</item>
+        <item>Triceps</item>
+        <item>Back</item>
+        <item>Back</item>
+        <item>Shoulders</item>
+        <item>Abdominal</item>
+        <item>Forearms</item>
+        <item>Leg</item>
+    </string-array>
+
 </resources>

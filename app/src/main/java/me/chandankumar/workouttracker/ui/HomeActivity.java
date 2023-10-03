@@ -23,4 +23,8 @@ public class HomeActivity extends AppCompatActivity {
     public void showWeightLogActivity(View view) {
         startActivity(new Intent(this, WeightLogActivity.class));
     }
+
+    public void showStatsActivity(View view) {
+        startActivity(new Intent(this, StatsActivity.class));
+    }
 }

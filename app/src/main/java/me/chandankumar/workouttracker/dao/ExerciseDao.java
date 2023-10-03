@@ -17,6 +17,9 @@ public interface ExerciseDao {
     @Query("SELECT * FROM Exercise WHERE bodyPartId=:bodyPartId")
     List<Exercise> getAllByBodyPartId(int bodyPartId);
 
+    @Query("SELECT exerciseName FROM Exercise WHERE bodyPartId=:bodyPartId")
+    List<String> getAllExerciseNamesByBodyPartId(int bodyPartId);
+
     @Query("SELECT * FROM Exercise")
     List<Exercise> getAll();
 

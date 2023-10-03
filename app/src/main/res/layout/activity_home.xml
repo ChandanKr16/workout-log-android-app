@@ -222,6 +222,7 @@
             </androidx.cardview.widget.CardView>
 
      <androidx.cardview.widget.CardView
+         android:onClick="showStatsActivity"
             app:cardBackgroundColor="@color/white"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"

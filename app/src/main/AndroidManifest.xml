@@ -14,16 +14,19 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:theme="@style/AppTheme"
-            android:name=".ui.HomeActivity"
+            android:name=".ui.StatsActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.WeightLogGraphActivity"
             android:exported="false" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".ui.WeightLogActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"
@@ -36,13 +39,13 @@
             android:name=".ui.RepInfoActivity"
             android:exported="false" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".ui.ExerciseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".ui.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
