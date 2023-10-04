@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.text.Editable;
 import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.Toast;
@@ -57,14 +58,15 @@ import me.chandankumar.workouttracker.ui.customviews.DrawableClickListener;
 public class StatsActivity extends AppCompatActivity {
 
     private BarChart chart;
-    ArrayList<BarEntry> values;
+    private XAxis xAxis;
     private PowerSpinnerView muscleGroupSpinner;
     private PowerSpinnerView exerciseSpinner;
     private CustomEditText startDateEditText;
     private CustomEditText endDateEditText;
     private Button showButton;
     private List<Exercise> exerciseList;
-    private XAxis xAxis;
+    private ArrayList<BarEntry> values;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +74,14 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
 
         initViews();
-        attachListenerOnDatePicker();
-
-
-
-        // TODO load all exercise by body part then populate the exerise list from db to spinner
-        //setRepData();
-
+        attachListenerOnMuscleGroupSpinner();
+        attachListenerOnDatePickerAndShowButton();
         setBarChartConfig();
 
-//        loadData();
-//        setData(10, 1000);
-//        chart.invalidate();
+        exerciseSpinner.setOnSpinnerItemSelectedListener((i, o, i1, t1) -> exerciseSpinner.setError(null));
+
+
+
     }
 
     private void initViews(){
@@ -95,13 +93,17 @@ public class StatsActivity extends AppCompatActivity {
         endDateEditText = (CustomEditText) findViewById(R.id.end_date_edit_text);
         showButton = (Button) findViewById(R.id.show_button);
 
+    }
+
+    private void attachListenerOnMuscleGroupSpinner(){
         muscleGroupSpinner.setOnSpinnerItemSelectedListener((i, o, bodyPartId, t1) -> {
 
-            AppExecutors.getInstance().diskIO().execute(() ->{
+            muscleGroupSpinner.setError(null);
+
+            AppExecutors.getInstance().diskIO().execute(() -> {
                 List<String> exerciseNameList = WorkoutDatabase.getInstance(getApplicationContext())
                         .exerciseDao()
                         .getAllExerciseNamesByBodyPartId(bodyPartId);
-
 
                 exerciseList =  WorkoutDatabase.getInstance(getApplicationContext())
                         .exerciseDao()
@@ -109,17 +111,13 @@ public class StatsActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> exerciseSpinner.setItems(exerciseNameList));
 
-
-
-
-
             });
 
 
         });
     }
 
-    private void attachListenerOnDatePicker(){
+    private void attachListenerOnDatePickerAndShowButton(){
         Calendar mCalendar = Calendar.getInstance();
 
         Date lastWeekDate = new Date();
@@ -134,7 +132,7 @@ public class StatsActivity extends AppCompatActivity {
 
         DatePickerDialog startDatePickerDialog = new DatePickerDialog(
                 StatsActivity.this,
-                (datePicker, year1, month1, dayOfMonth1) -> startDateEditText.setText(""+ dayOfMonth1 + "-" + (month+1) + "-" + year1),
+                (datePicker, year1, month1, dayOfMonth1) -> startDateEditText.setText(""+ dayOfMonth1 + "-" + (datePicker.getMonth()+1) + "-" + year1),
                 year, month, dayOfMonth);
 
         startDateEditText.setDrawableClickListener(new DrawableClickListener() {
@@ -151,7 +149,7 @@ public class StatsActivity extends AppCompatActivity {
 
         DatePickerDialog endDatePickerDialog = new DatePickerDialog(
                 StatsActivity.this,
-                (datePicker, year1, month1, dayOfMonth1) -> endDateEditText.setText(""+ dayOfMonth1 + "-" + (month+1) + "-" + year1),
+                (datePicker, year1, month1, dayOfMonth1) -> endDateEditText.setText(""+ dayOfMonth1 + "-" + (datePicker.getMonth()+1) + "-" + year1),
                 year, today.getMonth(), today.getDate());
 
         endDateEditText.setDrawableClickListener(new DrawableClickListener() {
@@ -166,6 +164,20 @@ public class StatsActivity extends AppCompatActivity {
 
         showButton.setOnClickListener(view -> {
 
+            if(muscleGroupSpinner.getSelectedIndex() == -1){
+                muscleGroupSpinner.setError("Choose muscle group");
+                return;
+            }
+
+            if(exerciseSpinner.getSelectedIndex() == -1){
+                exerciseSpinner.setError("Choose an exercise");
+                return;
+            }
+
+
+
+
+
 
             Date startDate = new Date(startDatePickerDialog.getDatePicker().getYear(), startDatePickerDialog.getDatePicker().getMonth(), startDatePickerDialog.getDatePicker().getDayOfMonth(), 0,0,0);
             Date endDate = new Date(endDatePickerDialog.getDatePicker().getYear(), endDatePickerDialog.getDatePicker().getMonth(), endDatePickerDialog.getDatePicker().getDayOfMonth(),0,0,0);
@@ -173,7 +185,9 @@ public class StatsActivity extends AppCompatActivity {
             startDate.setYear(startDate.getYear() - 1900);
             endDate.setYear(endDate.getYear() - 1900);
 
-            setRepData(exerciseSpinner.getSelectedIndex()+1);
+
+
+            setRepData(exerciseSpinner.getSelectedIndex()+1, startDate, endDate);
 
         });
 
@@ -184,12 +198,12 @@ public class StatsActivity extends AppCompatActivity {
     private void setBarChartConfig(){
 
         chart.getDescription().setEnabled(false);
-        //chart.setMaxVisibleValueCount(10);
+        chart.setNoDataTextColor(Color.BLACK);
         chart.setTouchEnabled(true);
         chart.setPinchZoom(true);
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
-        chart.setExtraOffsets(8, 8, 8, 8);
+        chart.setExtraOffsets(8, 8, 8, 24);
         chart.getAxisLeft().setDrawGridLines(false);
         chart.getAxisRight().setEnabled(false);
         chart.animateY(1500);
@@ -202,26 +216,21 @@ public class StatsActivity extends AppCompatActivity {
         xAxis = chart.getXAxis();
         xAxis.setEnabled(true);
         xAxis.setAxisLineColor(Color.TRANSPARENT);
-        xAxis.setLabelCount(10);
+
         xAxis.setLabelRotationAngle(315.0f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-
-
-
-
     }
 
-    private void setRepData(int exerciseId){
+    private void setRepData(int exerciseId, Date startDate, Date endDate){
 
         chart.clear();
-
         values = new ArrayList<>();
 
-        AppExecutors.getInstance().diskIO().execute(() ->{
+        AppExecutors.getInstance().diskIO().execute(() -> {
             List<TotalVolume> allByVolume = WorkoutDatabase.getInstance(getApplicationContext())
                     .repInfoDao()
-                    .getAllByVolume(exerciseId);
+                    .getAllBetweenStartDateAndEndDate(exerciseId, startDate, endDate);
 
             String pattern = "dd-MMM";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -229,6 +238,8 @@ public class StatsActivity extends AppCompatActivity {
                 String date = simpleDateFormat.format(allByVolume.get(i).getDate());
                 values.add(new BarEntry(i, allByVolume.get(i).getTotalVolume(), date));
             }
+
+            xAxis.setLabelCount(values.size());
 
 
             BarDataSet barDataSet;
@@ -270,101 +281,4 @@ public class StatsActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-    private void loadData(){
-        chart.getDescription().setEnabled(false);
-
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        chart.setMaxVisibleValueCount(60);
-
-        chart.setPinchZoom(false);
-
-       chart.setDrawBarShadow(false);
-        chart.setDrawGridBackground(false);
-
-
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setEnabled(true);
-
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setEnabled(false);
-
-        xAxis.setAxisLineColor(Color.TRANSPARENT);
-        xAxis.setLabelCount(10);
-        xAxis.setLabelRotationAngle(315.0f);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-
-
-        //chart.setPadding(8, 8, 8, 16);
-        chart.setExtraOffsets(8, 8, 8, 8);
-
-
-
-
-        chart.getAxisLeft().setDrawGridLines(false);
-
-            List<String> dates = new ArrayList<>();
-
-
-        for(int i = 0; i < 10; i++){
-            dates.add("  15-feb");
-            dates.add("  20-jan");
-        }
-
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
-
-        // add a nice and smooth animation
-        chart.animateY(1500);
-
-        chart.getLegend().setEnabled(true);
-        chart.getLegend().setYEntrySpace(100.0f);
-        chart.getLegend().setXEntrySpace(100.0f);
-        chart.getLegend().
-                setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-
-    }
-
-    private void setData(int count, float range) {
-
-        ArrayList<BarEntry> values = new ArrayList<>();
-
-
-
-        for (int i = 0; i < count; i++) {
-            float multi = (range + 1);
-            float val = (float) (Math.random() * multi) + multi / 3;
-            values.add(new BarEntry(i, val));
-        }
-
-        BarDataSet set1;
-
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(values, "Data Set");
-            set1.setColors(ColorTemplate.rgb("#000"));
-            set1.setDrawValues(true);
-            set1.setValueTextSize(10.0f);
-            set1.setLabel("Volume");
-
-
-            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-
-            BarData data = new BarData(dataSets);
-            chart.setData(data);
-           chart.setFitBars(true);
-        }
-    }
 }
