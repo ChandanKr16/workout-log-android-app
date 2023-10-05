@@ -12,6 +12,7 @@ import android.provider.CalendarContract;
 import android.text.Editable;
 import android.util.DisplayMetrics;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -51,6 +52,7 @@ import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.domain.Exercise;
+import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.ui.customviews.CustomEditText;
 import me.chandankumar.workouttracker.ui.customviews.DrawableClickListener;
@@ -63,6 +65,7 @@ public class StatsActivity extends AppCompatActivity {
     private PowerSpinnerView exerciseSpinner;
     private CustomEditText startDateEditText;
     private CustomEditText endDateEditText;
+    private TextView maxWeightTextView;
     private Button showButton;
     private List<Exercise> exerciseList;
     private ArrayList<BarEntry> values;
@@ -92,6 +95,7 @@ public class StatsActivity extends AppCompatActivity {
         startDateEditText = (CustomEditText) findViewById(R.id.start_date_edit_text);
         endDateEditText = (CustomEditText) findViewById(R.id.end_date_edit_text);
         showButton = (Button) findViewById(R.id.show_button);
+        maxWeightTextView = findViewById(R.id.max_weight_textview);
 
     }
 
@@ -222,7 +226,7 @@ public class StatsActivity extends AppCompatActivity {
         xAxis.setDrawGridLines(false);
     }
 
-    private void setRepData(int exerciseId, Date startDate, Date endDate){
+    private void setRepData(int exerciseId, Date startDate, Date endDate) {
 
         chart.clear();
         values = new ArrayList<>();
@@ -234,7 +238,7 @@ public class StatsActivity extends AppCompatActivity {
 
             String pattern = "dd-MMM";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            for(int i = 0; i < allByVolume.size(); i++){
+            for (int i = 0; i < allByVolume.size(); i++) {
                 String date = simpleDateFormat.format(allByVolume.get(i).getDate());
                 values.add(new BarEntry(i, allByVolume.get(i).getTotalVolume(), date));
             }
@@ -267,8 +271,8 @@ public class StatsActivity extends AppCompatActivity {
             }
 
             List<String> dates = new ArrayList<>();
-            for(int i = 0; i < values.size(); i++){
-                dates.add( (String) values.get(i).getData());
+            for (int i = 0; i < values.size(); i++) {
+                dates.add((String) values.get(i).getData());
             }
 
             xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
@@ -277,8 +281,16 @@ public class StatsActivity extends AppCompatActivity {
 
         });
 
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            RepInfo maxWeightLifted = WorkoutDatabase.getInstance(getApplicationContext())
+                    .repInfoDao()
+                    .getMaxWeightLifted(exerciseId, startDate, endDate);
+
+            maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + maxWeightLifted.getDate().getMonth() + "-" + maxWeightLifted.getDate().getYear());
 
 
+        });
     }
+
 
 }
