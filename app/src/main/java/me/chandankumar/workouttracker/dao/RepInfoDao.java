@@ -18,10 +18,8 @@ public interface RepInfoDao {
     @Query("SELECT * FROM RepInfo WHERE exerciseId=:exerciseId ORDER BY date DESC")
     List<RepInfo> getAll(int exerciseId);
 
-
     @Query("SELECT SUM( rep * weight) AS totalVolume, date FROM RepInfo WHERE exerciseId=:exerciseId AND date BETWEEN :startDate AND :endDate GROUP BY date")
     List<TotalVolume> getAllBetweenStartDateAndEndDate(int exerciseId, Date startDate, Date endDate);
-
 
     @Query("SELECT * FROM RepInfo WHERE exerciseId=:exerciseId AND date=:date ORDER BY date DESC")
     List<RepInfo> getAllByDateAndExerciseId(Date date, int exerciseId);
@@ -29,11 +27,14 @@ public interface RepInfoDao {
     @Query("SELECT  SUM( rep * weight) AS totalVolume, date FROM RepInfo WHERE exerciseId=:exerciseId GROUP BY date ORDER BY date")
     List<TotalVolume> getAllByVolume(int exerciseId);
 
-    @Query("SELECT * FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate GROUP BY exerciseId=:exerciseId HAVING MAX(weight)")
+    @Query("SELECT * FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate GROUP BY exerciseId=:exerciseId HAVING MAX(weight) ORDER BY WEIGHT DESC")
     RepInfo getMaxWeightLifted(int exerciseId, Date startDate, Date endDate);
 
     @Query("SELECT SUM(rep * weight) as totalVolume FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate GROUP BY exerciseId=:exerciseId")
     Float getTotalVolumeFromDateToDate(int exerciseId, Date startDate, Date endDate);
+
+    @Query("SELECT *  FROM RepInfo WHERE exerciseId=:exerciseId AND date BETWEEN :startDate AND :endDate GROUP BY date")
+    List<RepInfo> getExerciseFromDateToDate(int exerciseId, Date startDate, Date endDate);
 
     @Insert
     void save(RepInfo repInfo);

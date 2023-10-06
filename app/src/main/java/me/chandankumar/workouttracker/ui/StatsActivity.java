@@ -66,6 +66,8 @@ public class StatsActivity extends AppCompatActivity {
     private CustomEditText startDateEditText;
     private CustomEditText endDateEditText;
     private TextView maxWeightTextView;
+    private TextView totalVolumeTextView;
+    private TextView exerciseCountTextView;
     private Button showButton;
     private List<Exercise> exerciseList;
     private ArrayList<BarEntry> values;
@@ -96,6 +98,8 @@ public class StatsActivity extends AppCompatActivity {
         endDateEditText = (CustomEditText) findViewById(R.id.end_date_edit_text);
         showButton = (Button) findViewById(R.id.show_button);
         maxWeightTextView = findViewById(R.id.max_weight_textview);
+        totalVolumeTextView = findViewById(R.id.total_volume_textview);
+        exerciseCountTextView = findViewById(R.id.exercise_count_textview);
 
     }
 
@@ -178,18 +182,11 @@ public class StatsActivity extends AppCompatActivity {
                 return;
             }
 
-
-
-
-
-
             Date startDate = new Date(startDatePickerDialog.getDatePicker().getYear(), startDatePickerDialog.getDatePicker().getMonth(), startDatePickerDialog.getDatePicker().getDayOfMonth(), 0,0,0);
             Date endDate = new Date(endDatePickerDialog.getDatePicker().getYear(), endDatePickerDialog.getDatePicker().getMonth(), endDatePickerDialog.getDatePicker().getDayOfMonth(),0,0,0);
 
             startDate.setYear(startDate.getYear() - 1900);
             endDate.setYear(endDate.getYear() - 1900);
-
-
 
             setRepData(exerciseSpinner.getSelectedIndex()+1, startDate, endDate);
 
@@ -286,10 +283,24 @@ public class StatsActivity extends AppCompatActivity {
                     .repInfoDao()
                     .getMaxWeightLifted(exerciseId, startDate, endDate);
 
-            maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + maxWeightLifted.getDate().getMonth() + "-" + maxWeightLifted.getDate().getYear());
+            Float totalVolume = WorkoutDatabase.getInstance(getApplicationContext())
+                    .repInfoDao()
+                    .getTotalVolumeFromDateToDate(exerciseId, startDate, endDate);
 
+            int exerciseCount = WorkoutDatabase.getInstance(getApplicationContext())
+                    .repInfoDao()
+                    .getExerciseFromDateToDate(exerciseId, startDate, endDate).size();
 
+            runOnUiThread(() -> {
+                maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + (maxWeightLifted.getDate().getMonth() + 1) + "-" + (maxWeightLifted.getDate().getYear()+1900));
+                totalVolumeTextView.setText("" + totalVolume + " Kg");
+                exerciseCountTextView.setText("" + exerciseCount + " Day(s)");
+            });
         });
+
+
+
+
     }
 
 

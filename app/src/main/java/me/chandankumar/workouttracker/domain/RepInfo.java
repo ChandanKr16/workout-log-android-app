@@ -108,4 +108,16 @@ public class RepInfo {
     public void setRep(int rep) {
         this.rep = rep;
     }
+
+    @Override
+    public String toString() {
+        return "RepInfo{" +
+                "repId=" + repId +
+                ", bodyPartId=" + bodyPartId +
+                ", exerciseId=" + exerciseId +
+                ", date=" + date +
+                ", weight=" + weight +
+                ", rep=" + rep +
+                '}';
+    }
 }
