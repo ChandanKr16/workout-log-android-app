@@ -233,6 +233,17 @@ public class StatsActivity extends AppCompatActivity {
                     .repInfoDao()
                     .getAllBetweenStartDateAndEndDate(exerciseId, startDate, endDate);
 
+
+            if(allByVolume.size() == 0){
+                runOnUiThread(() -> {
+                    chart.setNoDataText("No chart data available");
+
+                });
+
+                return;
+            }
+
+
             String pattern = "dd-MMM";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             for (int i = 0; i < allByVolume.size(); i++) {
@@ -279,6 +290,7 @@ public class StatsActivity extends AppCompatActivity {
         });
 
         AppExecutors.getInstance().diskIO().execute(() -> {
+
             RepInfo maxWeightLifted = WorkoutDatabase.getInstance(getApplicationContext())
                     .repInfoDao()
                     .getMaxWeightLifted(exerciseId, startDate, endDate);
@@ -291,11 +303,23 @@ public class StatsActivity extends AppCompatActivity {
                     .repInfoDao()
                     .getExerciseFromDateToDate(exerciseId, startDate, endDate).size();
 
-            runOnUiThread(() -> {
-                maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + (maxWeightLifted.getDate().getMonth() + 1) + "-" + (maxWeightLifted.getDate().getYear()+1900));
-                totalVolumeTextView.setText("" + totalVolume + " Kg");
-                exerciseCountTextView.setText("" + exerciseCount + " Day(s)");
-            });
+
+            if(maxWeightLifted != null && exerciseCount != 0)
+            {
+                runOnUiThread(() -> {
+                    maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + (maxWeightLifted.getDate().getMonth() + 1) + "-" + (maxWeightLifted.getDate().getYear()+1900));
+                    totalVolumeTextView.setText("" + totalVolume + " Kg");
+                    exerciseCountTextView.setText("" + exerciseCount + " Day(s)");
+                });
+            }
+            else{
+                runOnUiThread(() -> {
+                    maxWeightTextView.setText("No data available");
+                    totalVolumeTextView.setText("No data available");
+                    exerciseCountTextView.setText("No data available");
+                });
+            }
+
         });
 
 

@@ -15,6 +15,7 @@ import java.util.List;
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
+import me.chandankumar.workouttracker.domain.Subject;
 import me.chandankumar.workouttracker.domain.WeightLog;
 import me.chandankumar.workouttracker.utils.AlertDialogBuilder;
 import me.chandankumar.workouttracker.utils.Constants;
@@ -24,11 +25,13 @@ public class WeightLogAdapter extends RecyclerView.Adapter<WeightLogAdapter.View
     private Activity activity;
     private List<WeightLog> weightLogList;
     private WorkoutDatabase workoutDatabase;
+    private Subject subject;
 
-    public WeightLogAdapter(Activity activity, List<WeightLog> weightLogList, WorkoutDatabase workoutDatabase) {
+    public WeightLogAdapter(Activity activity, List<WeightLog> weightLogList, WorkoutDatabase workoutDatabase, Subject subject) {
         this.activity = activity;
         this.weightLogList = weightLogList;
         this.workoutDatabase = workoutDatabase;
+        this.subject = subject;
     }
 
     public void refresh(List<WeightLog> logs){
@@ -72,7 +75,10 @@ public class WeightLogAdapter extends RecyclerView.Adapter<WeightLogAdapter.View
                                     AppExecutors.getInstance().diskIO().execute(() -> {
                                         workoutDatabase.weightLogDao().delete(weightLogList.get(position));
                                         List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
-                                        activity.runOnUiThread(() -> refresh(logs));
+                                        activity.runOnUiThread(() ->{
+                                            refresh(logs);
+                                            subject.setValue(position);
+                                        });
 
                                     }))
                             .setNegativeButton(Constants.NO, (dialogInterface, i) -> dialogInterface.dismiss()).show();

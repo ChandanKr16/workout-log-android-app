@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,7 +37,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private WorkoutDatabase workoutDatabase;
     private ExerciseAdapter exerciseAdapter;
     private int bodyPartId;
-    private GifImageView emptyImg;
+    private LottieAnimationView emptyImg;
     private FloatingActionButton floatingActionButton;
 
     @Override

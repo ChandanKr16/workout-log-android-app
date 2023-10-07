@@ -1,27 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/nested_scrollview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_img"
     tools:context=".ui.WeightLogActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/weight_log_recyclerview"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
+        android:layout_height="match_parent">
+
+   <androidx.appcompat.widget.LinearLayoutCompat
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <TextView
+           android:paddingTop="8dp"
+           android:textColor="#fff"
+           android:id="@+id/textView2"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="16dp"
+           android:text="Weight Log"
+           android:textAppearance="@style/TextAppearance.AppCompat.Large"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+
+
+       <com.github.mikephil.charting.charts.BarChart
+           android:layout_marginTop="16dp"
+           android:layout_marginBottom="16dp"
+           android:id="@+id/bar_chart"
+           android:layout_width="match_parent"
+           android:layout_height="240dp"
+           android:layout_marginStart="16dp"
+           android:layout_marginEnd="16dp"
+           android:background="@drawable/rounded_background"
+           android:elevation="8dp"
+           android:padding="8dp"
+           tools:layout_editor_absoluteY="8dp" />
+
+
+       <FrameLayout
+           android:id="@+id/frame_layout"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+
+       <com.airbnb.lottie.LottieAnimationView
+           android:layout_gravity="center"
+           android:layout_width="wrap_content"
+           android:layout_height="240dp"
+           android:id="@+id/empty_img"
+           app:lottie_rawRes="@raw/empty_animation"
+           app:lottie_autoPlay="true"
+           app:lottie_loop="true"/>
+
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/weight_log_recyclerview"
+               android:layout_width="match_parent"
+               android:layout_height="448dp"
+               />
+
+
+       </FrameLayout>
+
+
+
+
+   </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:onClick="showAddWeightLogDialog"
+        android:id="@+id/add_weight_log_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add_white_24dp"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

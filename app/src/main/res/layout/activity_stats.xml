@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:spinner_arrow_gravity="end"
-        app:spinner_arrow_tint="@color/green"
+        app:spinner_arrow_tint="@color/black"
         app:spinner_item_array="@array/muscle_group_array" />
 
     <com.skydoves.powerspinner.PowerSpinnerView
@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/muscle_group_spinner"
         app:spinner_arrow_gravity="end"
-        app:spinner_arrow_tint="@color/green"
+        app:spinner_arrow_tint="@color/black"
         app:spinner_item_array="@array/muscle_group_array" />
 
 
@@ -115,7 +115,7 @@
         <com.github.mikephil.charting.charts.BarChart
             android:padding="8dp"
             android:background="@drawable/rounded_background"
-            android:elevation="10dp"
+            android:elevation="8dp"
             android:id="@+id/bar_chart"
             android:layout_width="match_parent"
             android:layout_height="240dp"
@@ -127,6 +127,7 @@
             app:layout_constraintTop_toBottomOf="@+id/show_button" />
 
         <androidx.cardview.widget.CardView
+            android:elevation="10dp"
             android:id="@+id/cardDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

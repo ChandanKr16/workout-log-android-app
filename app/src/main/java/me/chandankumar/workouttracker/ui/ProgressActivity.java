@@ -78,12 +78,9 @@ public class ProgressActivity extends AppCompatActivity {
                 (datePicker, year1, month1, dayOfMonth1) -> startDateEditText.setText(""+ dayOfMonth1 + "-" + (month+1) + "-" + year1),
                 year, month, dayOfMonth);
 
-        startDateEditText.setDrawableClickListener(new DrawableClickListener() {
-            @Override
-            public void onClick(DrawablePosition target) {
-                if(DrawablePosition.RIGHT == target){
-                    startDatePickerDialog.show();
-                }
+        startDateEditText.setDrawableClickListener(target -> {
+            if(DrawableClickListener.DrawablePosition.RIGHT == target){
+                startDatePickerDialog.show();
             }
         });
 
