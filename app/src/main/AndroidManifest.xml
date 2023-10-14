@@ -28,9 +28,9 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
 
-        <service
-            android:name="androidx.room.MultiInstanceInvalidationService"
-            tools:node="remove" />
+<!--        <service-->
+<!--            android:name="androidx.room.MultiInstanceInvalidationService"-->
+<!--            tools:node="remove" />-->
 
         <activity
             android:name=".ui.ProgressActivity"

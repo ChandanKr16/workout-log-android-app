@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/bottom_sheet_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img">
+
+
+
+<!--        <TextView-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:textColor="#fff"-->
+<!--            android:id="@+id/textView2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="One Rep Max Calculator "-->
+<!--            android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:inputType="numberDecimal"
+                android:id="@+id/weight_edittext"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_background"
+                android:hint="Enter Weight"
+                android:padding="12dp" />
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+
+                android:id="@+id/weight_unit_spinner"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/rounded_background"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="18dp"
+                app:spinner_arrow_gravity="end"
+                app:spinner_arrow_tint="@color/black"
+                app:spinner_item_array="@array/weight_unit" />
+
+
+
+        </LinearLayout>
+
+        <EditText
+            android:inputType="numberDecimal"
+            android:id="@+id/reps_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/rounded_background"
+            android:hint="Enter Reps"
+            android:padding="12dp" />
+
+        <Button
+
+            android:textColor="@color/white"
+            android:background="@color/black"
+            android:id="@+id/show_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Compute" />
+
+        <TextView
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:textColor="#fff"
+            android:id="@+id/one_rep_max_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Result: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </LinearLayout>
