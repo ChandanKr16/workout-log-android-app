@@ -19,7 +19,7 @@ import me.chandankumar.workouttracker.R;
 public class HomeActivity extends AppCompatActivity {
 
     private BottomSheetDialog bottomSheetDialog;
-    private  View bottomSheetView;
+    private View bottomSheetView;
     private EditText weightEditText;
     private EditText repsEditText;
     private PowerSpinnerView unitSpinner;
@@ -79,5 +79,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showOneRepMaxCalcActivity(View view) {
         bottomSheetDialog.show();
+    }
+
+    public void showSettingActivity(View view) {
+        startActivity(new Intent(this, SettingActivity.class));
     }
 }
