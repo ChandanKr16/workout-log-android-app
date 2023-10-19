@@ -27,6 +27,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <androidx.cardview.widget.CardView
+            android:onClick="backupWorkoutLog"
             android:id="@+id/backup_card"
             android:layout_margin="16dp"
             android:elevation="8dp"
@@ -69,6 +70,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:onClick="restoreWorkoutLog"
             android:id="@+id/restore_card"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
