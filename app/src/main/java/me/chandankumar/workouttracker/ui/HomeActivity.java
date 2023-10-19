@@ -84,4 +84,5 @@ public class HomeActivity extends AppCompatActivity {
     public void showSettingActivity(View view) {
         startActivity(new Intent(this, SettingActivity.class));
     }
+
 }

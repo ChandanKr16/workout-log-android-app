@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/bottom_sheet_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img">
+
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:textAlignment="center"
+            android:paddingTop="8dp"
+            android:textColor="#fff"
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credits"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_marginTop="4dp"
+        android:padding="16dp"
+        android:textColor="#fff"
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/credits"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:textAlignment="center"
+        android:paddingBottom="16dp"
+        android:textColor="#fff"
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thank You  &#128522;"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+
+
+
+</LinearLayout>
