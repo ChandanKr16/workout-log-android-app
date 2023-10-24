@@ -1,15 +1,18 @@
 package me.chandankumar.workouttracker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.powerspinner.PowerSpinnerView;
@@ -24,11 +27,18 @@ public class HomeActivity extends AppCompatActivity {
     private EditText repsEditText;
     private PowerSpinnerView unitSpinner;
     private TextView oneRMTextView;
+    private NestedScrollView nestedScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        nestedScrollView = findViewById(R.id.activity_home_ui);
+        nestedScrollView.setBackground(getResources().getDrawable(R.drawable.background_img_blue));
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
         setupBottomSheetView();
 
     }

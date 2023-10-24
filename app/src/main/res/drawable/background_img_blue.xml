@@ -6,11 +6,14 @@
     xmlns:android = "http://schemas.android.com/apk/res/android" >
 
     <gradient
-        android:startColor = "#00EFAD"
-        android:centerColor = "#09AD60"
-        android:endColor = "#09AD60"
+        android:startColor = "#00E6FF"
+        android:centerColor = "#006DFF"
+        android:endColor = "#006DFF"
         android:angle = "90"
         android:type = "linear" />
+
+
+
 
 
 </shape>
