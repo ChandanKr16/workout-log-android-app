@@ -160,6 +160,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:onClick="reportBug"
             android:id="@+id/report_issue_card"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
@@ -190,7 +191,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="2dp"
                     android:padding="8dp"
-                    android:text="Report Issue"
+                    android:text="Report Bug"
                     android:textColor="#000"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintBottom_toBottomOf="parent"

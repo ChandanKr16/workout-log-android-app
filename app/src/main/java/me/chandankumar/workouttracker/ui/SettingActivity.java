@@ -3,6 +3,7 @@ package me.chandankumar.workouttracker.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,5 +92,12 @@ public class SettingActivity extends AppCompatActivity {
 
     public void restoreWorkoutLog(View view) {
         restore();
+    }
+
+    public void reportBug(View view) {
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:ckp1606@gmail.com?subject=Workout Log App Bug Report"));
+        startActivity(Intent.createChooser(emailIntent, "Report Bug"));
     }
 }
