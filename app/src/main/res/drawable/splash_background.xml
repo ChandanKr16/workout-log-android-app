@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/white"/>
+    <item android:drawable="@drawable/background_img"/>
 
-        <item
-            android:gravity="center"
-            android:drawable="@drawable/ic_undraw_fitness" />
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/ic_undraw_jogging" />
+
+    <item
+        android:bottom="32dp"
+        android:top="260dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_test_icon" />
 
 
 
