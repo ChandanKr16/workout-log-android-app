@@ -1,5 +1,7 @@
 package me.chandankumar.workouttracker.ui;
 
+import static me.chandankumar.workouttracker.R.drawable.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
@@ -13,11 +15,14 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 import me.chandankumar.workouttracker.R;
+import me.chandankumar.workouttracker.utils.SharedPref;
+import me.chandankumar.workouttracker.utils.Theme;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -27,21 +32,56 @@ public class HomeActivity extends AppCompatActivity {
     private EditText repsEditText;
     private PowerSpinnerView unitSpinner;
     private TextView oneRMTextView;
-    private NestedScrollView nestedScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        nestedScrollView = findViewById(R.id.activity_home_ui);
-        nestedScrollView.setBackground(getResources().getDrawable(R.drawable.background_img_blue));
-        Window window = this.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.blue));
+
+        setupTheme();
         setupBottomSheetView();
 
     }
+
+    private void setupTheme(){
+        int background = SharedPref.getBackground(this);
+
+        Toast.makeText(getApplicationContext(), "Background: " + background, Toast.LENGTH_LONG).show();
+
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+    }
+
+    private void setupThemeForBottomSheet(){
+        int background = SharedPref.getBackground(this);
+
+        Toast.makeText(getApplicationContext(), "Background: " + background, Toast.LENGTH_LONG).show();
+
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+    }
+
+
 
     public void showWorkoutLogActivity(View view){
         startActivity(new Intent(this, MainActivity.class));
@@ -59,9 +99,14 @@ public class HomeActivity extends AppCompatActivity {
         bottomSheetDialog = new BottomSheetDialog(
                 HomeActivity.this, R.style.BottomSheetDialogTheme);
 
+        LinearLayout linearLayout = findViewById(R.id.bottom_sheet_container);
+
         bottomSheetView = LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.one_rep_max_calc_bottom_sheet,
-                        (LinearLayout)findViewById(R.id.bottom_sheet_container));
+                       linearLayout);
+
+
+        setupThemeForBottomSheet();
 
         weightEditText = bottomSheetView.findViewById(R.id.weight_edittext);
         repsEditText = bottomSheetView.findViewById(R.id.reps_edittext);

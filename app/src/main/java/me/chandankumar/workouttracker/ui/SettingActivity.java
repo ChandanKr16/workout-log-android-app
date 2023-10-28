@@ -1,5 +1,9 @@
 package me.chandankumar.workouttracker.ui;
 
+import static me.chandankumar.workouttracker.R.drawable.background_img;
+import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
+import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,6 +21,8 @@ import java.io.File;
 import de.raphaelebner.roomdatabasebackup.core.RoomBackup;
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
+import me.chandankumar.workouttracker.utils.SharedPref;
+import me.chandankumar.workouttracker.utils.Theme;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -30,10 +36,29 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        setupTheme();
+
         roomBackup = new RoomBackup(SettingActivity.this);
 
 
         setupBottomSheetView();
+    }
+
+    private void setupTheme(){
+        int background = SharedPref.getBackground(this);
+
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
     }
 
     public void showCreditsSheet(View view) {
@@ -99,5 +124,28 @@ public class SettingActivity extends AppCompatActivity {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto:ckp1606@gmail.com?subject=Workout Log App Bug Report"));
         startActivity(Intent.createChooser(emailIntent, "Report Bug"));
+    }
+
+    public void changeBackgroundToGreen(View view) {
+
+        SharedPref.updateBackground(this, Theme.ThemeColor.GREEN.ordinal());
+        restartApp();
+    }
+
+    public void changeBackgroundToBlue(View view) {
+        SharedPref.updateBackground(this,  Theme.ThemeColor.BLUE.ordinal());
+        restartApp();
+
+    }
+
+    public void changeBackgroundToPink(View view) {
+        SharedPref.updateBackground(this, Theme.ThemeColor.PINK.ordinal());
+        restartApp();
+    }
+
+    private void restartApp(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        this.startActivity(intent);
+        this.finishAffinity();
     }
 }

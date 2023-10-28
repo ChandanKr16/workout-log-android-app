@@ -1,5 +1,9 @@
 package me.chandankumar.workouttracker.ui;
 
+import static me.chandankumar.workouttracker.R.drawable.background_img;
+import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
+import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +60,8 @@ import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.ui.customviews.CustomEditText;
 import me.chandankumar.workouttracker.ui.customviews.DrawableClickListener;
+import me.chandankumar.workouttracker.utils.SharedPref;
+import me.chandankumar.workouttracker.utils.Theme;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -78,6 +84,8 @@ public class StatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
+        setupTheme();
+
         initViews();
         attachListenerOnMuscleGroupSpinner();
         attachListenerOnDatePickerAndShowButton();
@@ -88,6 +96,24 @@ public class StatsActivity extends AppCompatActivity {
 
 
     }
+
+    private void setupTheme(){
+        int background = SharedPref.getBackground(this);
+
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+    }
+
 
     private void initViews(){
         chart = findViewById(R.id.bar_chart);

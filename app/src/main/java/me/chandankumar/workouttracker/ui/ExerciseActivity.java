@@ -1,5 +1,9 @@
 package me.chandankumar.workouttracker.ui;
 
+import static me.chandankumar.workouttracker.R.drawable.background_img;
+import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
+import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +33,8 @@ import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.utils.BodyParts;
 import me.chandankumar.workouttracker.utils.Constants;
+import me.chandankumar.workouttracker.utils.SharedPref;
+import me.chandankumar.workouttracker.utils.Theme;
 import pl.droidsonroids.gif.GifImageView;
 
 public class ExerciseActivity extends AppCompatActivity {
@@ -45,6 +51,8 @@ public class ExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
+        setupTheme();
+
         bodyPartId = getIntent().getIntExtra("id", BodyParts.BICEP.ordinal());
         workoutDatabase = WorkoutDatabase.getInstance(getApplicationContext());
 
@@ -53,6 +61,24 @@ public class ExerciseActivity extends AppCompatActivity {
 
         initExerciseRecyclerView();
 
+    }
+
+
+    private void setupTheme(){
+        int background = SharedPref.getBackground(this);
+
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
     }
 
     private void initView(){
