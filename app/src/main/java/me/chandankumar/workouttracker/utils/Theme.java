@@ -14,7 +14,8 @@ public class Theme {
     public enum ThemeColor {
         GREEN,
         BLUE,
-        PINK
+        PINK,
+        DARK
     }
 
     public static void changeBackground(Context context, View view, Window window, Drawable background, int colorId){

@@ -2,6 +2,7 @@ package me.chandankumar.workouttracker.ui;
 
 import static me.chandankumar.workouttracker.R.drawable.background_img;
 import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
+import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         if(background == Theme.ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+        if(background == Theme.ThemeColor.DARK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
+                    getResources().getDrawable(background_img_dark), R.color.dark);
         }
     }
 

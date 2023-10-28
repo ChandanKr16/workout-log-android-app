@@ -60,6 +60,10 @@ public class HomeActivity extends AppCompatActivity {
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
+        if(background == Theme.ThemeColor.DARK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
+                    getResources().getDrawable(background_img_dark), R.color.dark);
+        }
     }
 
     private void setupThemeForBottomSheet(){
@@ -78,6 +82,10 @@ public class HomeActivity extends AppCompatActivity {
         if(background == Theme.ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+        if(background == Theme.ThemeColor.DARK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_dark), R.color.dark);
         }
     }
 

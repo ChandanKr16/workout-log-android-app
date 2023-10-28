@@ -146,7 +146,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="2dp"
                     android:padding="8dp"
-                    android:text="Change Background"
+                    android:text="Background"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="#000"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -185,6 +185,17 @@
                     android:layout_marginTop="14dp"
                     android:src="@drawable/background_img_pink"
                     app:layout_constraintStart_toEndOf="@+id/blue_bg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:onClick="changeBackgroundToDark"
+                    android:id="@+id/dark_bg"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="14dp"
+                    android:src="@drawable/background_img_dark"
+                    app:layout_constraintStart_toEndOf="@+id/pink_bg"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
