@@ -70,6 +70,27 @@ public class SettingActivity extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
+    private void setupThemeForBottomSheet(){
+        int background = SharedPref.getBackground(this);
+        if(background == Theme.ThemeColor.GREEN.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img), R.color.green);
+        }
+        if(background == Theme.ThemeColor.BLUE.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_blue), R.color.blue);
+        }
+        if(background == Theme.ThemeColor.PINK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_pink), R.color.pink);
+        }
+        if(background == Theme.ThemeColor.DARK.ordinal()){
+            Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
+                    getResources().getDrawable(background_img_dark), R.color.dark);
+        }
+    }
+
+
     private void setupBottomSheetView(){
         bottomSheetDialog = new BottomSheetDialog(
                 SettingActivity.this, R.style.BottomSheetDialogTheme);
@@ -77,6 +98,8 @@ public class SettingActivity extends AppCompatActivity {
         bottomSheetView = LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.credits_bottom_sheet,
                         (LinearLayout)findViewById(R.id.bottom_sheet_container));
+
+        setupThemeForBottomSheet();
 
 
         bottomSheetDialog.setContentView(bottomSheetView);
