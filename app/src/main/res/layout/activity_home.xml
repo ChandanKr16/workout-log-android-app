@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Gym Log"
+            android:text="FittyLogr"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#fff" />
 
@@ -322,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:layout_marginTop="8dp"
-                    android:text="Setting"
+                    android:text="Settings"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView44" />
 

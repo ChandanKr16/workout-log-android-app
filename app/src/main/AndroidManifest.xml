@@ -24,17 +24,13 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.WeightLogGraphActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.WeightLogActivity"
             android:exported="false"
-            android:theme="@style/AppTheme" /> <!-- <service -->
+            android:theme="@style/AppTheme" />
+        <!-- <service -->
         <!-- android:name="androidx.room.MultiInstanceInvalidationService" -->
         <!-- tools:node="remove" /> -->
-        <activity
-            android:name=".ui.ProgressActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.RepInfoActivity"
             android:exported="false" />

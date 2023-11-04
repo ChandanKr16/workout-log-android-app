@@ -7,8 +7,8 @@
 
     <gradient
         android:startColor = "#CE079A"
-        android:centerColor = "#FF3270"
-        android:endColor = "#FF3270"
+        android:centerColor = "#DD1250"
+        android:endColor = "#DD1250"
         android:angle = "90"
         android:type = "linear" />
 

@@ -24,6 +24,7 @@ import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -48,19 +49,19 @@ public class SettingActivity extends AppCompatActivity {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }
@@ -72,19 +73,19 @@ public class SettingActivity extends AppCompatActivity {
 
     private void setupThemeForBottomSheet(){
         int background = SharedPref.getBackground(this);
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }
@@ -156,18 +157,18 @@ public class SettingActivity extends AppCompatActivity {
 
     public void changeBackgroundToGreen(View view) {
 
-        SharedPref.updateBackground(this, Theme.ThemeColor.GREEN.ordinal());
+        SharedPref.updateBackground(this, ThemeColor.GREEN.ordinal());
         restartApp();
     }
 
     public void changeBackgroundToBlue(View view) {
-        SharedPref.updateBackground(this,  Theme.ThemeColor.BLUE.ordinal());
+        SharedPref.updateBackground(this,  ThemeColor.BLUE.ordinal());
         restartApp();
 
     }
 
     public void changeBackgroundToPink(View view) {
-        SharedPref.updateBackground(this, Theme.ThemeColor.PINK.ordinal());
+        SharedPref.updateBackground(this, ThemeColor.PINK.ordinal());
         restartApp();
     }
 
@@ -178,7 +179,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void changeBackgroundToDark(View view) {
-        SharedPref.updateBackground(this, Theme.ThemeColor.DARK.ordinal());
+        SharedPref.updateBackground(this, ThemeColor.DARK.ordinal());
         restartApp();
     }
 }

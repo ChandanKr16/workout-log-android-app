@@ -13,4 +13,14 @@
         android:type = "linear" />
 
 
+
+<!--    <gradient-->
+<!--        android:startColor = "#fff"-->
+<!--        android:centerColor = "#fff"-->
+<!--        android:endColor = "#fff"-->
+<!--        android:angle = "90"-->
+<!--        android:type = "linear" />-->
+
+
+
 </shape>

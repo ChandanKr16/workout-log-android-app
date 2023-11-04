@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#09AD60</color>
     <color name="transparent">#00000000 </color>
-    <color name="blue">#006DFF</color>
-    <color name="pink">#FF3270</color>
+    <color name="blue">#1861C1</color>
+    <color name="pink">#DD1250</color>
     <color name="dark">#262626</color>
 </resources>

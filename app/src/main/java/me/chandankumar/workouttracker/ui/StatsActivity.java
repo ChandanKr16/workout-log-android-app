@@ -5,53 +5,30 @@ import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
 import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.text.Editable;
-import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
-
-import org.eazegraph.lib.models.BarModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
@@ -63,6 +40,7 @@ import me.chandankumar.workouttracker.ui.customviews.CustomEditText;
 import me.chandankumar.workouttracker.ui.customviews.DrawableClickListener;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -101,19 +79,19 @@ public class StatsActivity extends AppCompatActivity {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }

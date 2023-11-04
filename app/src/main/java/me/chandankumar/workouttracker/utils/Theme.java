@@ -11,13 +11,6 @@ import androidx.core.content.ContextCompat;
 
 public class Theme {
 
-    public enum ThemeColor {
-        GREEN,
-        BLUE,
-        PINK,
-        DARK
-    }
-
     public static void changeBackground(Context context, View view, Window window, Drawable background, int colorId){
 
         view.setBackground(background);

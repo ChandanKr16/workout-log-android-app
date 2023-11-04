@@ -3,19 +3,14 @@ package me.chandankumar.workouttracker.ui;
 import static me.chandankumar.workouttracker.R.drawable.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.skydoves.powerspinner.PowerSpinnerView;
@@ -23,6 +18,7 @@ import com.skydoves.powerspinner.PowerSpinnerView;
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -46,21 +42,19 @@ public class HomeActivity extends AppCompatActivity {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        Toast.makeText(getApplicationContext(), "Background: " + background, Toast.LENGTH_LONG).show();
-
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.activity_home_ui), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }
@@ -69,21 +63,19 @@ public class HomeActivity extends AppCompatActivity {
     private void setupThemeForBottomSheet(){
         int background = SharedPref.getBackground(this);
 
-        Toast.makeText(getApplicationContext(), "Background: " + background, Toast.LENGTH_LONG).show();
-
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), bottomSheetView.findViewById(R.id.bottom_sheet_container), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }

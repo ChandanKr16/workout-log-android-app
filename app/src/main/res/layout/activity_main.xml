@@ -15,20 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:id="@+id/animation_view"
-            app:lottie_rawRes="@raw/animation_ln5l9u2c"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
-
         <TextView
+            android:layout_marginStart="16dp"
+            android:paddingTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Muscle Group"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#fff" />
@@ -76,7 +67,7 @@
         <androidx.cardview.widget.CardView
             app:cardBackgroundColor="#fff"
             android:onClick="showChestExerciseListActivity"
-           android:layout_marginLeft="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:elevation="8dp"
             app:cardElevation="8dp"

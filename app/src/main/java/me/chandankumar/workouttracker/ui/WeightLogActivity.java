@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.BarChart;
@@ -46,6 +45,7 @@ import me.chandankumar.workouttracker.domain.WeightLog;
 import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class WeightLogActivity extends AppCompatActivity implements Observer {
 
@@ -80,19 +80,19 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }

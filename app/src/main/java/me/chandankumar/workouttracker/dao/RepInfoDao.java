@@ -36,6 +36,13 @@ public interface RepInfoDao {
     @Query("SELECT *  FROM RepInfo WHERE exerciseId=:exerciseId AND date BETWEEN :startDate AND :endDate GROUP BY date")
     List<RepInfo> getExerciseFromDateToDate(int exerciseId, Date startDate, Date endDate);
 
+    @Query("SELECT * FROM RepInfo WHERE exerciseId=:exerciseId AND date=(SELECT MAX(date) from RepInfo)")
+    List<RepInfo> getLastPerformedExercise(int exerciseId);
+
+
+    @Query("SELECT SUM(rep * weight) as totalVolume FROM RepInfo WHERE exerciseId=:exerciseId AND date=(SELECT MAX(date) from RepInfo)")
+    TotalVolume getTotalVolumeOfLastPerformedExercise(int exerciseId);
+
     @Insert
     void save(RepInfo repInfo);
 

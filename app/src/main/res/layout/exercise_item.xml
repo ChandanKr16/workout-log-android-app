@@ -53,6 +53,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/last_rep_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_baseline_history_24"
+            app:layout_constraintEnd_toStartOf="@+id/delete_imageview"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
             android:id="@+id/delete_imageview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -5,21 +5,17 @@ import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
 import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -36,7 +32,7 @@ import me.chandankumar.workouttracker.utils.BodyParts;
 import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
-import pl.droidsonroids.gif.GifImageView;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -46,18 +42,23 @@ public class ExerciseActivity extends AppCompatActivity {
     private int bodyPartId;
     private LottieAnimationView emptyImg;
     private FloatingActionButton floatingActionButton;
+    private TextView titleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
+        initView();
 
         setupTheme();
 
         bodyPartId = getIntent().getIntExtra("id", BodyParts.BICEP.ordinal());
         workoutDatabase = WorkoutDatabase.getInstance(getApplicationContext());
 
-        initView();
+        String title = BodyParts.values()[bodyPartId].name();
+
+        titleTextView.setText(""+ title.charAt(0)+"".toUpperCase() + title.substring(1).toLowerCase() + " - Exercise");
+
         exerciseRecyclerview.setVisibility(View.GONE);
 
         initExerciseRecyclerView();
@@ -68,19 +69,19 @@ public class ExerciseActivity extends AppCompatActivity {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }
@@ -90,6 +91,7 @@ public class ExerciseActivity extends AppCompatActivity {
         exerciseRecyclerview = findViewById(R.id.exercise_recyclerview);
         emptyImg = findViewById(R.id.empty_img);
         floatingActionButton = findViewById(R.id.add_fab);
+        titleTextView = findViewById(R.id.title_textview);
        // floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
 
     }
@@ -155,22 +157,4 @@ public class ExerciseActivity extends AppCompatActivity {
         });
 
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.add_exercise_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.add_exercise_menu_item:
-//                showAddExerciseDialog();
-//                return true;
-//            default:
-//                return super.onContextItemSelected(item);
-//        }
-//    }
 }

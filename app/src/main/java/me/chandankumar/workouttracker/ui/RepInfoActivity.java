@@ -6,21 +6,18 @@ import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
 import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +34,7 @@ import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
+import me.chandankumar.workouttracker.utils.ThemeColor;
 
 public class RepInfoActivity extends AppCompatActivity {
 
@@ -44,7 +42,9 @@ public class RepInfoActivity extends AppCompatActivity {
     private WorkoutDatabase workoutDatabase;
     private int exerciseId;
     private int bodyPartId;
+    private String exerciseName;
     private RepInfoAdapter repInfoAdapter;
+    private TextView exerciseNameTextView;
     private CalendarView workoutCalendarView;
     private FloatingActionButton repInfoFAB;
 
@@ -56,11 +56,15 @@ public class RepInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rep_info);
 
         setupTheme();
+        initViews();
 
         exerciseId = getIntent().getIntExtra("exerciseId", 1);
         bodyPartId = getIntent().getIntExtra("bodyPartId", 1);
+        exerciseName = getIntent().getStringExtra("exerciseName");
 
-        initViews();
+        exerciseNameTextView.setText(exerciseName + " - Rep Info");
+
+
         workoutDatabase = WorkoutDatabase.getInstance(getApplicationContext());
         initExerciseRecyclerView();
 
@@ -69,19 +73,19 @@ public class RepInfoActivity extends AppCompatActivity {
     private void setupTheme(){
         int background = SharedPref.getBackground(this);
 
-        if(background == Theme.ThemeColor.GREEN.ordinal()){
+        if(background == ThemeColor.GREEN.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img), R.color.green);
         }
-        if(background == Theme.ThemeColor.BLUE.ordinal()){
+        if(background == ThemeColor.BLUE.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_blue), R.color.blue);
         }
-        if(background == Theme.ThemeColor.PINK.ordinal()){
+        if(background == ThemeColor.PINK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_pink), R.color.pink);
         }
-        if(background == Theme.ThemeColor.DARK.ordinal()){
+        if(background == ThemeColor.DARK.ordinal()){
             Theme.changeBackground(getApplicationContext(), findViewById(R.id.nested_scrollview), this.getWindow(),
                     getResources().getDrawable(background_img_dark), R.color.dark);
         }
@@ -92,6 +96,8 @@ public class RepInfoActivity extends AppCompatActivity {
         workoutCalendarView = findViewById(R.id.workout_calendarview);
 
         repInfoFAB = findViewById(R.id.add_rep_info_button);
+
+        exerciseNameTextView = findViewById(R.id.exercise_name_textview);
 
 //        repInfoRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //

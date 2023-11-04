@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/background_img"/>
+    <item android:drawable="@drawable/splash_background_img"/>
 
     <item
         android:gravity="center"
@@ -11,7 +11,7 @@
         android:bottom="32dp"
         android:top="260dp"
         android:gravity="center"
-        android:drawable="@drawable/ic_test_icon" />
+        android:drawable="@drawable/ic_fittylogr" />
 
 
 

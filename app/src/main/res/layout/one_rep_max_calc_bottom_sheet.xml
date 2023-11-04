@@ -18,7 +18,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="One Rep Max Calculator "
+            android:text="1 Rep Max Calculator "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
