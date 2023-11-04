@@ -39,6 +39,9 @@
             app:lottie_loop="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingBottom="52dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="32dp"
         android:id="@+id/exercise_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

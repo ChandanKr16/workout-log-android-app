@@ -21,6 +21,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -281,6 +282,7 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
                             barDataSet.setDrawValues(true);
                             barDataSet.setValueTextSize(10.0f);
                             barDataSet.setLabel("Volume (Kg)");
+
 
 
                             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
