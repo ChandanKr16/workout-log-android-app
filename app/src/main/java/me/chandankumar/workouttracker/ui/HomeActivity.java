@@ -117,10 +117,39 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomSheetView.findViewById(R.id.show_button).setOnClickListener(view1 -> {
 
-            float weight = Float.parseFloat(weightEditText.getText().toString());
-            int reps = Integer.parseInt(repsEditText.getText().toString());
 
-            double oneRMResult = Utils.calculate1RM(reps, weight);
+            String weight = weightEditText.getText().toString()+"";
+            String reps = repsEditText.getText().toString() + "";
+
+
+            if(weight.isEmpty()){
+                weightEditText.setError("Weight cannot be empty");
+                return;
+            }
+
+            float weightVal = Float.parseFloat(weight);
+
+            if(weightVal < 5 || weightVal > 999){
+                weightEditText.setError("Invalid weight it should be between 5 to 999");
+                return;
+            }
+
+
+            if(reps.isEmpty()){
+                repsEditText.setError("Reps cannot be empty");
+                return;
+            }
+
+            int repsVal = Integer.parseInt(reps);
+
+
+            if(repsVal < 5 || repsVal > 30){
+                repsEditText.setError("Invalid reps it should be between 5 to 31");
+                return;
+            }
+
+
+            double oneRMResult = Utils.calculate1RM(repsVal, weightVal);
 
             oneRMTextView.setText("Your 1RM is " + oneRMResult + " " + unitSpinner.getText());
 

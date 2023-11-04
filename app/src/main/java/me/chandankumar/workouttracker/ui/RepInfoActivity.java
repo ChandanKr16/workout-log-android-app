@@ -164,8 +164,18 @@ public class RepInfoActivity extends AppCompatActivity {
                 return;
             }
 
+            if(Float.parseFloat(weight) < 1 || Float.parseFloat(weight) > 500){
+                weightEditText.setError("Invalid weight range 1 - 500 Kg");
+                return;
+            }
+
             if(reps.isEmpty()){
                 repsEditText.setError("Reps cannot be empty");
+                return;
+            }
+
+            if(Integer.parseInt(reps) <= 0 || Integer.parseInt(reps) > 50){
+                repsEditText.setError("Invalid reps range 1 - 50");
                 return;
             }
 

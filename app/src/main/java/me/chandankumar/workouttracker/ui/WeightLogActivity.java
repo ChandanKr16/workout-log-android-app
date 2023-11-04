@@ -159,19 +159,25 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
                 if(workoutDatabase.weightLogDao().getTodayWeightLog(today1) == null) {
                     String weight = weightEditText.getText().toString().trim();
 
-                    if(weight.isEmpty()){
-                        weightEditText.setError("Weight cannot be empty");
-                        return;
-                    }
+                    runOnUiThread(() -> {
+
+                        if(weight.isEmpty()){
+                            weightEditText.setError("Weight cannot be empty");
+                            return;
+                        }
 
 
-                    AppExecutors.getInstance().diskIO().execute(() -> {
+                        if(Float.parseFloat(weight) < 20 || Float.parseFloat(weight) > 300){
+                            weightEditText.setError("Invalid body weight it should be between 20 to 300 Kg");
+                            return;
+                        }
 
+                        AppExecutors.getInstance().diskIO().execute(() -> {
 
-                        float lastWeightLog = 0f;
+                            float lastWeightLog = 0f;
 
-                        if(workoutDatabase.weightLogDao().getLatestWeight() != null)
-                            lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
+                            if(workoutDatabase.weightLogDao().getLatestWeight() != null)
+                                lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
 
 
 //                        Date date = new Date();
@@ -180,24 +186,31 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
 //                        int day = date.getDate();
 //                        Date toBeSaved = new Date(year, month, day);
 
-                        Date toBeSaved = Utils.getDateWithoutTime();
+                            Date toBeSaved = Utils.getDateWithoutTime();
 
-                        float gain = Float.parseFloat(weight) - lastWeightLog;
+                            float gain = Float.parseFloat(weight) - lastWeightLog;
 
-                        gain = (float) ((float) Math.round(gain * 100.0) / 100.0);
+                            gain = (float) ((float) Math.round(gain * 100.0) / 100.0);
 
-                        workoutDatabase.weightLogDao().save(new WeightLog(toBeSaved, Float.parseFloat(weight), gain));
+                            workoutDatabase.weightLogDao().save(new WeightLog(toBeSaved, Float.parseFloat(weight), gain));
 
-                        List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
-                        runOnUiThread(() -> {
-                            emptyImg.setVisibility(View.GONE);
-                            weightLogRecyclerView.setVisibility(View.VISIBLE);
-                            weightLogAdapter.refresh(logs);
-                            setWeightLogData();
+                            List<WeightLog> logs = workoutDatabase.weightLogDao().getAll();
+                            runOnUiThread(() -> {
+                                emptyImg.setVisibility(View.GONE);
+                                weightLogRecyclerView.setVisibility(View.VISIBLE);
+                                weightLogAdapter.refresh(logs);
+                                setWeightLogData();
+                            });
+
+                            alertDialog.dismiss();
                         });
 
-                        alertDialog.dismiss();
-                });
+                    });
+
+
+
+
+
                 }});
         });
     }
