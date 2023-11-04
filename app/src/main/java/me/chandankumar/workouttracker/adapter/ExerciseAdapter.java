@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.util.Date;
 import java.util.List;
 
 import me.chandankumar.workouttracker.R;

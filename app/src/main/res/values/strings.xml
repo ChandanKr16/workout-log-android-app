@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Workout Log</string>
+    <string name="app_name">FittyLogr</string>
     <string-array name="muscle_group_array">
         <item>Bicep</item>
         <item>Chest</item>
