@@ -38,14 +38,15 @@ import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.ui.customviews.CustomEditText;
 import me.chandankumar.workouttracker.ui.customviews.DrawableClickListener;
+import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
 import me.chandankumar.workouttracker.utils.ThemeColor;
+import me.chandankumar.workouttracker.utils.Utils;
 
 public class StatsActivity extends AppCompatActivity {
 
-    private BarChart chart;
-    private XAxis xAxis;
+
     private PowerSpinnerView muscleGroupSpinner;
     private PowerSpinnerView exerciseSpinner;
     private CustomEditText startDateEditText;
@@ -54,6 +55,9 @@ public class StatsActivity extends AppCompatActivity {
     private TextView totalVolumeTextView;
     private TextView exerciseCountTextView;
     private Button showButton;
+
+    private BarChart chart;
+    private XAxis xAxis;
     private List<Exercise> exerciseList;
     private ArrayList<BarEntry> values;
 
@@ -71,8 +75,6 @@ public class StatsActivity extends AppCompatActivity {
         setBarChartConfig();
 
         exerciseSpinner.setOnSpinnerItemSelectedListener((i, o, i1, t1) -> exerciseSpinner.setError(null));
-
-
 
     }
 
@@ -135,11 +137,13 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void attachListenerOnDatePickerAndShowButton(){
-        Calendar mCalendar = Calendar.getInstance();
+//        Calendar mCalendar = Calendar.getInstance();
+//
+//        Date lastWeekDate = new Date();
+//        lastWeekDate.setTime(lastWeekDate.getTime() - 6 * 86400000L);
+//        mCalendar.setTime(lastWeekDate);
 
-        Date lastWeekDate = new Date();
-        lastWeekDate.setTime(lastWeekDate.getTime() - 6 * 86400000L);
-        mCalendar.setTime(lastWeekDate);
+        Calendar mCalendar = Utils.getLastWeekCalendarDate();
 
         int year = mCalendar.get(Calendar.YEAR);
         int month = mCalendar.get(Calendar.MONTH);
@@ -152,12 +156,9 @@ public class StatsActivity extends AppCompatActivity {
                 (datePicker, year1, month1, dayOfMonth1) -> startDateEditText.setText(""+ dayOfMonth1 + "-" + (datePicker.getMonth()+1) + "-" + year1),
                 year, month, dayOfMonth);
 
-        startDateEditText.setDrawableClickListener(new DrawableClickListener() {
-            @Override
-            public void onClick(DrawablePosition target) {
-                if(DrawablePosition.RIGHT == target){
-                    startDatePickerDialog.show();
-                }
+        startDateEditText.setDrawableClickListener(target -> {
+            if(DrawableClickListener.DrawablePosition.RIGHT == target){
+                startDatePickerDialog.show();
             }
         });
 
@@ -169,12 +170,9 @@ public class StatsActivity extends AppCompatActivity {
                 (datePicker, year1, month1, dayOfMonth1) -> endDateEditText.setText(""+ dayOfMonth1 + "-" + (datePicker.getMonth()+1) + "-" + year1),
                 year, today.getMonth(), today.getDate());
 
-        endDateEditText.setDrawableClickListener(new DrawableClickListener() {
-            @Override
-            public void onClick(DrawablePosition target) {
-                if(DrawablePosition.RIGHT == target){
-                    endDatePickerDialog.show();
-                }
+        endDateEditText.setDrawableClickListener(target -> {
+            if(DrawableClickListener.DrawablePosition.RIGHT == target){
+                endDatePickerDialog.show();
             }
         });
 
@@ -194,8 +192,8 @@ public class StatsActivity extends AppCompatActivity {
             Date startDate = new Date(startDatePickerDialog.getDatePicker().getYear(), startDatePickerDialog.getDatePicker().getMonth(), startDatePickerDialog.getDatePicker().getDayOfMonth(), 0,0,0);
             Date endDate = new Date(endDatePickerDialog.getDatePicker().getYear(), endDatePickerDialog.getDatePicker().getMonth(), endDatePickerDialog.getDatePicker().getDayOfMonth(),0,0,0);
 
-            startDate.setYear(startDate.getYear() - 1900);
-            endDate.setYear(endDate.getYear() - 1900);
+            startDate.setYear(startDate.getYear() - Constants.GREGORIAN_INITIAL_YEAR);
+            endDate.setYear(endDate.getYear() - Constants.GREGORIAN_INITIAL_YEAR);
 
             setRepData(exerciseSpinner.getSelectedIndex()+1, startDate, endDate);
 

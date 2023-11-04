@@ -21,6 +21,7 @@ public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText 
     public CustomEditText (Context context, AttributeSet attrs) {
         super(context, attrs);
         // this Contructure required when you are using this view in xml
+        this.setEnabled(false);
     }
 
     public CustomEditText(Context context, AttributeSet attrs, int defStyle) {

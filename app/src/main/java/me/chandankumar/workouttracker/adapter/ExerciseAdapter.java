@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -19,8 +18,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import org.w3c.dom.Text;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +31,7 @@ import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.ui.RepInfoActivity;
 import me.chandankumar.workouttracker.utils.AlertDialogBuilder;
 import me.chandankumar.workouttracker.utils.Constants;
+import me.chandankumar.workouttracker.utils.Utils;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
 
@@ -77,28 +75,23 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             activity.startActivity(intent);
         });
 
-        holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+        holder.deleteImageView.setOnClickListener( view ->
                 AlertDialogBuilder.getConfirmAlertDialog(activity, "Delete", "Are you sure you want to delete this exercise log?")
-                        .setPositiveButton("YES", (dialogInterface, i) ->
-                                AppExecutors.getInstance().diskIO().execute(() -> {
-                                    workoutDatabase.exerciseDao().delete(exerciseList.get(position));
-                                    List<Exercise> exercises = workoutDatabase.exerciseDao().getAllByBodyPartId(bodyPartId);
+                .setPositiveButton("YES", (dialogInterface, i) ->
+                        AppExecutors.getInstance().diskIO().execute(() -> {
+                            workoutDatabase.exerciseDao().delete(exerciseList.get(position));
+                            List<Exercise> exercises = workoutDatabase.exerciseDao().getAllByBodyPartId(bodyPartId);
 
-                                    activity.runOnUiThread(() -> {
-                                        if(exercises.size() == 0){
-                                            activity.findViewById(R.id.empty_img).setVisibility(View.VISIBLE);
-                                            activity.findViewById(R.id.exercise_recyclerview).setVisibility(View.GONE);
-                                        }
-                                        refresh(exercises);
-                                    });
+                            activity.runOnUiThread(() -> {
+                                if(exercises.size() == 0){
+                                    activity.findViewById(R.id.empty_img).setVisibility(View.VISIBLE);
+                                    activity.findViewById(R.id.exercise_recyclerview).setVisibility(View.GONE);
+                                }
+                                refresh(exercises);
+                            });
 
-                                }))
-                        .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss()).show();
-            }
-        });
+                        }))
+                .setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss()).show());
 
         holder.editImageView.setOnClickListener(view -> {
 
@@ -171,7 +164,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
                 activity.runOnUiThread(() ->{
 
                     if(reps.isEmpty()) return;
-                    alertDialog.setTitle("Last Rep Info - " + constructDate(reps.get(0).getDate()));
+                    alertDialog.setTitle("Last Rep Info - " + Utils.constructDate(reps.get(0).getDate()));
                     repInfoTextView.setText(constructRepInfoData(reps));
                     totalVolumeTextView.setText("Total Volume: " + totalVolume.getTotalVolume() + " Kg");
 
@@ -201,10 +194,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         }
 
         return stringBuilder.toString();
-    }
-
-    private static String constructDate(Date date){
-        return "" + date.getDate() + "-" + (date.getMonth()+1) + "-" + (date.getYear()+1900);
     }
 
     @Override

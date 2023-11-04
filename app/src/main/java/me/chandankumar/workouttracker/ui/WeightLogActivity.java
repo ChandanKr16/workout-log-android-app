@@ -5,11 +5,6 @@ import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
 import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -47,6 +46,7 @@ import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
 import me.chandankumar.workouttracker.utils.ThemeColor;
+import me.chandankumar.workouttracker.utils.Utils;
 
 public class WeightLogActivity extends AppCompatActivity implements Observer {
 
@@ -157,9 +157,6 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
                 Date today1 = new Date(year1, month1, day1);
 
                 if(workoutDatabase.weightLogDao().getTodayWeightLog(today1) == null) {
-
-
-
                     String weight = weightEditText.getText().toString().trim();
 
                     if(weight.isEmpty()){
@@ -177,11 +174,13 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
                             lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
 
 
-                        Date date = new Date();
-                        int year = date.getYear();
-                        int month = date.getMonth();
-                        int day = date.getDate();
-                        Date toBeSaved = new Date(year, month, day);
+//                        Date date = new Date();
+//                        int year = date.getYear();
+//                        int month = date.getMonth();
+//                        int day = date.getDate();
+//                        Date toBeSaved = new Date(year, month, day);
+
+                        Date toBeSaved = Utils.getDateWithoutTime();
 
                         float gain = Float.parseFloat(weight) - lastWeightLog;
 

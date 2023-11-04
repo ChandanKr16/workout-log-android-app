@@ -36,7 +36,6 @@ public class Exercise {
         this.exerciseName = exerciseName;
     }
 
-
     public int getExerciseId() {
         return exerciseId;
     }

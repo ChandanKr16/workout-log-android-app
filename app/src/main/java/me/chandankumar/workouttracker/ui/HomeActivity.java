@@ -19,6 +19,7 @@ import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
 import me.chandankumar.workouttracker.utils.ThemeColor;
+import me.chandankumar.workouttracker.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -116,13 +117,10 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomSheetView.findViewById(R.id.show_button).setOnClickListener(view1 -> {
 
-
-
             float weight = Float.parseFloat(weightEditText.getText().toString());
             int reps = Integer.parseInt(repsEditText.getText().toString());
 
-            double oneRMResult = weight / (1.0278 - (0.0278 * reps));
-            oneRMResult = ((double) Math.round(oneRMResult * 100.0) / 100.0);
+            double oneRMResult = Utils.calculate1RM(reps, weight);
 
             oneRMTextView.setText("Your 1RM is " + oneRMResult + " " + unitSpinner.getText());
 

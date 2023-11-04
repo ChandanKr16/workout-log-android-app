@@ -9,7 +9,6 @@ import androidx.room.Update;
 import java.util.Date;
 import java.util.List;
 
-import me.chandankumar.workouttracker.domain.RepInfo;
 import me.chandankumar.workouttracker.domain.WeightLog;
 
 @Dao

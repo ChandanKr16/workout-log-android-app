@@ -6,11 +6,6 @@ import static me.chandankumar.workouttracker.R.drawable.background_img_blue;
 import static me.chandankumar.workouttracker.R.drawable.background_img_dark;
 import static me.chandankumar.workouttracker.R.drawable.background_img_pink;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +14,12 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -35,19 +33,19 @@ import me.chandankumar.workouttracker.utils.Constants;
 import me.chandankumar.workouttracker.utils.SharedPref;
 import me.chandankumar.workouttracker.utils.Theme;
 import me.chandankumar.workouttracker.utils.ThemeColor;
+import me.chandankumar.workouttracker.utils.Utils;
 
 public class RepInfoActivity extends AppCompatActivity {
 
+    private TextView exerciseNameTextView;
+    private CalendarView workoutCalendarView;
     private RecyclerView repInfoRecyclerview;
+
     private WorkoutDatabase workoutDatabase;
+    private RepInfoAdapter repInfoAdapter;
     private int exerciseId;
     private int bodyPartId;
     private String exerciseName;
-    private RepInfoAdapter repInfoAdapter;
-    private TextView exerciseNameTextView;
-    private CalendarView workoutCalendarView;
-    private FloatingActionButton repInfoFAB;
-
 
 
     @Override
@@ -95,25 +93,7 @@ public class RepInfoActivity extends AppCompatActivity {
         repInfoRecyclerview = findViewById(R.id.rep_info_recyclerview);
         workoutCalendarView = findViewById(R.id.workout_calendarview);
 
-        repInfoFAB = findViewById(R.id.add_rep_info_button);
-
         exerciseNameTextView = findViewById(R.id.exercise_name_textview);
-
-//        repInfoRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                if (dy > 0 || dy < 0 && repInfoFAB.isShown())
-//                    repInfoFAB.hide();
-//            }
-//
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE)
-//                    repInfoFAB.show();
-//                super.onScrollStateChanged(recyclerView, newState);
-//            }
-//        });
 
         workoutCalendarView.setFirstDayOfWeek(2);
 
@@ -133,11 +113,13 @@ public class RepInfoActivity extends AppCompatActivity {
 
         AppExecutors.getInstance().diskIO().execute(() -> {
 
-            Date date = new Date();
-            int year = date.getYear();
-            int month = date.getMonth();
-            int day = date.getDate();
-            Date newDateWithoutTime = new Date(year, month, day);
+//            Date date = new Date();
+//            int year = date.getYear();
+//            int month = date.getMonth();
+//            int day = date.getDate();
+          //  Date newDateWithoutTime = new Date(year, month, day);
+
+            Date newDateWithoutTime = Utils.getDateWithoutTime();
 
             List<RepInfo> reps = workoutDatabase.repInfoDao().getAllByDateAndExerciseId(newDateWithoutTime, exerciseId);
 
@@ -191,11 +173,13 @@ public class RepInfoActivity extends AppCompatActivity {
             AppExecutors.getInstance().diskIO().execute(() -> {
 
 
-                Date date = new Date();
-                int year = date.getYear();
-                int month = date.getMonth();
-                int day = date.getDate();
-                Date toBeSaved = new Date(year, month, day);
+//                Date date = new Date();
+//                int year = date.getYear();
+//                int month = date.getMonth();
+//                int day = date.getDate();
+//                Date toBeSaved = new Date(year, month, day);
+
+                Date toBeSaved = Utils.getDateWithoutTime();
 
                 workoutDatabase.repInfoDao().save(new RepInfo(bodyPartId,
                         exerciseId,
@@ -212,30 +196,6 @@ public class RepInfoActivity extends AppCompatActivity {
         });
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.add_rep_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.add_exercise_menu_item:
-//                showAddRepDialog();
-//                return true;
-//            case R.id.chart_menu_item:
-//
-//                Intent intent = new Intent(getApplicationContext(), ProgressActivity.class);
-//                intent.putExtra("exerciseId", exerciseId);
-//                startActivity(intent);
-//
-//                return true;
-//            default:
-//                return super.onContextItemSelected(item);
-//        }
-//    }
 
 
     public void showAddRepInfoDialog(View view) {

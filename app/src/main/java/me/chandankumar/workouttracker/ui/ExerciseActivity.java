@@ -37,26 +37,26 @@ import me.chandankumar.workouttracker.utils.ThemeColor;
 public class ExerciseActivity extends AppCompatActivity {
 
     private RecyclerView exerciseRecyclerview;
-    private WorkoutDatabase workoutDatabase;
-    private ExerciseAdapter exerciseAdapter;
-    private int bodyPartId;
     private LottieAnimationView emptyImg;
     private FloatingActionButton floatingActionButton;
     private TextView titleTextView;
+
+    private WorkoutDatabase workoutDatabase;
+    private ExerciseAdapter exerciseAdapter;
+    private int bodyPartId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         initView();
-
         setupTheme();
 
         bodyPartId = getIntent().getIntExtra("id", BodyParts.BICEP.ordinal());
         workoutDatabase = WorkoutDatabase.getInstance(getApplicationContext());
 
         String title = BodyParts.values()[bodyPartId].name();
-
         titleTextView.setText(""+ title.charAt(0)+"".toUpperCase() + title.substring(1).toLowerCase() + " - Exercise");
 
         exerciseRecyclerview.setVisibility(View.GONE);
@@ -92,8 +92,6 @@ public class ExerciseActivity extends AppCompatActivity {
         emptyImg = findViewById(R.id.empty_img);
         floatingActionButton = findViewById(R.id.add_fab);
         titleTextView = findViewById(R.id.title_textview);
-       // floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
-
     }
 
 
