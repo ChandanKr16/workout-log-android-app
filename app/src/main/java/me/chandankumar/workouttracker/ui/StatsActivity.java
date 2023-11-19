@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -60,6 +62,7 @@ public class StatsActivity extends AppCompatActivity {
     private XAxis xAxis;
     private List<Exercise> exerciseList;
     private ArrayList<BarEntry> values;
+
 
 
     @Override
@@ -128,7 +131,19 @@ public class StatsActivity extends AppCompatActivity {
                         .exerciseDao()
                         .getAllByBodyPartId(bodyPartId);
 
-                runOnUiThread(() -> exerciseSpinner.setItems(exerciseNameList));
+                runOnUiThread(() -> {
+                    exerciseSpinner.setText("Exercise");
+
+                    if(exerciseList.size()>0){
+
+                        exerciseSpinner.setSpinnerPopupHeight(128*exerciseList.size());
+
+                        exerciseSpinner.setItems(exerciseNameList);
+                    }
+                    else{
+                        exerciseSpinner.setItems(new ArrayList<>());
+                    }
+                });
 
             });
 
@@ -189,13 +204,18 @@ public class StatsActivity extends AppCompatActivity {
                 return;
             }
 
-            Date startDate = new Date(startDatePickerDialog.getDatePicker().getYear(), startDatePickerDialog.getDatePicker().getMonth(), startDatePickerDialog.getDatePicker().getDayOfMonth(), 0,0,0);
-            Date endDate = new Date(endDatePickerDialog.getDatePicker().getYear(), endDatePickerDialog.getDatePicker().getMonth(), endDatePickerDialog.getDatePicker().getDayOfMonth(),0,0,0);
+            Date startDate = new Date(startDatePickerDialog.getDatePicker().getYear() - Constants.GREGORIAN_INITIAL_YEAR,
+                    startDatePickerDialog.getDatePicker().getMonth(),
+                    startDatePickerDialog.getDatePicker().getDayOfMonth(), 0,0,0);
 
-            startDate.setYear(startDate.getYear() - Constants.GREGORIAN_INITIAL_YEAR);
-            endDate.setYear(endDate.getYear() - Constants.GREGORIAN_INITIAL_YEAR);
+            Date endDate = new Date(endDatePickerDialog.getDatePicker().getYear() - Constants.GREGORIAN_INITIAL_YEAR,
+                    endDatePickerDialog.getDatePicker().getMonth(),
+                    endDatePickerDialog.getDatePicker().getDayOfMonth(),0,0,0);
 
-            setRepData(exerciseSpinner.getSelectedIndex()+1, startDate, endDate);
+
+            if(exerciseList.size() != 0){
+                setRepData(exerciseList.get(exerciseSpinner.getSelectedIndex()).getExerciseId(), startDate, endDate);
+            }
 
         });
 
@@ -234,8 +254,16 @@ public class StatsActivity extends AppCompatActivity {
 
         chart.clear();
         values = new ArrayList<>();
+        if(chart.getData() != null){
+            chart.getData().clearValues();
+
+        }
+
+        chart.setNoDataText("No chart data available");
+
 
         AppExecutors.getInstance().diskIO().execute(() -> {
+
             List<TotalVolume> allByVolume = WorkoutDatabase.getInstance(getApplicationContext())
                     .repInfoDao()
                     .getAllBetweenStartDateAndEndDate(exerciseId, startDate, endDate);
@@ -243,7 +271,14 @@ public class StatsActivity extends AppCompatActivity {
 
             if(allByVolume.size() == 0){
                 runOnUiThread(() -> {
+
+                    chart.clear();
                     chart.setNoDataText("No chart data available");
+
+                    if(chart.getData() != null){
+                        chart.getData().clearValues();
+
+                    }
 
                 });
 
@@ -260,8 +295,8 @@ public class StatsActivity extends AppCompatActivity {
 
             xAxis.setLabelCount(values.size());
 
-
             BarDataSet barDataSet;
+
 
             if (chart.getData() != null &&
                     chart.getData().getDataSetCount() > 0) {
@@ -314,7 +349,7 @@ public class StatsActivity extends AppCompatActivity {
             if(maxWeightLifted != null && exerciseCount != 0)
             {
                 runOnUiThread(() -> {
-                    maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDay() + "-" + (maxWeightLifted.getDate().getMonth() + 1) + "-" + (maxWeightLifted.getDate().getYear()+1900));
+                    maxWeightTextView.setText("" + maxWeightLifted.getWeight() + " Kg × " + maxWeightLifted.getRep() + " Reps on " + maxWeightLifted.getDate().getDate() + "-" + (maxWeightLifted.getDate().getMonth() + 1) + "-" + (maxWeightLifted.getDate().getYear()+1900));
                     totalVolumeTextView.setText("" + totalVolume + " Kg");
                     exerciseCountTextView.setText("" + exerciseCount + " Day(s)");
                 });

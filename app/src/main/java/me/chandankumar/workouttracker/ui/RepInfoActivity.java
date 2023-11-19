@@ -92,6 +92,8 @@ public class RepInfoActivity extends AppCompatActivity {
     public void initViews(){
         repInfoRecyclerview = findViewById(R.id.rep_info_recyclerview);
         workoutCalendarView = findViewById(R.id.workout_calendarview);
+        workoutCalendarView.setMaxDate(System.currentTimeMillis());
+
 
         exerciseNameTextView = findViewById(R.id.exercise_name_textview);
 
@@ -113,13 +115,7 @@ public class RepInfoActivity extends AppCompatActivity {
 
         AppExecutors.getInstance().diskIO().execute(() -> {
 
-//            Date date = new Date();
-//            int year = date.getYear();
-//            int month = date.getMonth();
-//            int day = date.getDate();
-          //  Date newDateWithoutTime = new Date(year, month, day);
-
-            Date newDateWithoutTime = Utils.getDateWithoutTime();
+            Date newDateWithoutTime = Utils.getTodayDateWithoutTime();
 
             List<RepInfo> reps = workoutDatabase.repInfoDao().getAllByDateAndExerciseId(newDateWithoutTime, exerciseId);
 
@@ -182,14 +178,7 @@ public class RepInfoActivity extends AppCompatActivity {
 
             AppExecutors.getInstance().diskIO().execute(() -> {
 
-
-//                Date date = new Date();
-//                int year = date.getYear();
-//                int month = date.getMonth();
-//                int day = date.getDate();
-//                Date toBeSaved = new Date(year, month, day);
-
-                Date toBeSaved = Utils.getDateWithoutTime();
+                Date toBeSaved = Utils.getTodayDateWithoutTime();
 
                 workoutDatabase.repInfoDao().save(new RepInfo(bodyPartId,
                         exerciseId,

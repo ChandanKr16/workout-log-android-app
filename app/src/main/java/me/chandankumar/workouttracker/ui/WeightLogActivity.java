@@ -180,13 +180,7 @@ public class WeightLogActivity extends AppCompatActivity implements Observer {
                                 lastWeightLog = workoutDatabase.weightLogDao().getLatestWeight().getWeight();
 
 
-//                        Date date = new Date();
-//                        int year = date.getYear();
-//                        int month = date.getMonth();
-//                        int day = date.getDate();
-//                        Date toBeSaved = new Date(year, month, day);
-
-                            Date toBeSaved = Utils.getDateWithoutTime();
+                            Date toBeSaved = Utils.getTodayDateWithoutTime();
 
                             float gain = Float.parseFloat(weight) - lastWeightLog;
 

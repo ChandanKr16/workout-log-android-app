@@ -15,7 +15,7 @@ public class Utils {
         return ((double) Math.round(oneRMResult * 100.0) / 100.0);
     }
 
-    public static Date getDateWithoutTime(){
+    public static Date getTodayDateWithoutTime(){
         Date date = new Date();
         int year = date.getYear();
         int month = date.getMonth();

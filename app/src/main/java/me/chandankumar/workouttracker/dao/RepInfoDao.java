@@ -27,10 +27,10 @@ public interface RepInfoDao {
     @Query("SELECT  SUM( rep * weight) AS totalVolume, date FROM RepInfo WHERE exerciseId=:exerciseId GROUP BY date ORDER BY date")
     List<TotalVolume> getAllByVolume(int exerciseId);
 
-    @Query("SELECT * FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate GROUP BY exerciseId=:exerciseId HAVING MAX(weight) ORDER BY WEIGHT DESC")
+    @Query("SELECT * FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate AND exerciseId=:exerciseId ORDER BY WEIGHT DESC")
     RepInfo getMaxWeightLifted(int exerciseId, Date startDate, Date endDate);
 
-    @Query("SELECT SUM(rep * weight) as totalVolume FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate GROUP BY exerciseId=:exerciseId")
+    @Query("SELECT SUM(rep * weight) as totalVolume FROM RepInfo WHERE  date BETWEEN :startDate AND :endDate and exerciseId=:exerciseId")
     Float getTotalVolumeFromDateToDate(int exerciseId, Date startDate, Date endDate);
 
     @Query("SELECT *  FROM RepInfo WHERE exerciseId=:exerciseId AND date BETWEEN :startDate AND :endDate GROUP BY date")

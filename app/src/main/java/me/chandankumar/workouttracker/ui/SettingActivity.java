@@ -118,7 +118,7 @@ public class SettingActivity extends AppCompatActivity {
                 roomBackup.restartApp(new Intent(getApplicationContext(), HomeActivity.class));
             }
             else{
-                Toast.makeText(getApplicationContext(), "Backup failed: " + message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Backup failed: " + message + " Error Code: " + exitCode, Toast.LENGTH_LONG).show();
             }
         });
         roomBackup.backup();
@@ -134,7 +134,7 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Restore successful", Toast.LENGTH_LONG).show();
                 roomBackup.restartApp(new Intent(getApplicationContext(), HomeActivity.class));
             }else{
-                Toast.makeText(getApplicationContext(), "Restoration failed: " + message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Restoration failed: " + message + " Error Code: " + exitCode, Toast.LENGTH_LONG).show();
             }
         });
         roomBackup.restore();
@@ -152,7 +152,13 @@ public class SettingActivity extends AppCompatActivity {
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto:ckp1606@gmail.com?subject=Workout Log App Bug Report"));
-        startActivity(Intent.createChooser(emailIntent, "Report Bug"));
+
+        if (emailIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(emailIntent, "Report Bug"));
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Send bug report to ckp1606@gmail.com", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void changeBackgroundToGreen(View view) {
