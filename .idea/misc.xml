@@ -44,12 +44,15 @@
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/credits_bottom_sheet.xml" value="0.264" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/exercise_input_dialog.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/exercise_item.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/exp_list_body.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/exp_list_header.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/last_rep_info_input_dialog.xml" value="0.25" />
-        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/one_rep_max_calc_bottom_sheet.xml" value="0.1" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/one_rep_max_calc_bottom_sheet.xml" value="0.16" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/rep_info_input_dialog.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/rep_item.xml" value="0.264" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/weight_input_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/weight_log_item.xml" value="0.1" />
+        <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/layout/workout_history_bottom_sheet.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/menu/add_exercise_menu.xml" value="0.2" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/menu/add_rep_menu.xml" value="0.1" />
         <entry key="..\:/Users/Chand/AndroidStudioProjects/WorkoutTracker/app/src/main/res/menu/main_menu.xml" value="0.25" />

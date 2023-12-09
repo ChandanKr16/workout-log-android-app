@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/bottom_sheet_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img">
+
+
+    <TextView
+        android:layout_marginTop="4dp"
+        android:textAlignment="center"
+        android:paddingTop="8dp"
+        android:textColor="#fff"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bicep Exercise"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+    <ExpandableListView
+        android:id="@+id/workout_history_exapandable_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:dividerHeight="5dp"
+        android:padding="10dp"/>
+
+
+</LinearLayout>
