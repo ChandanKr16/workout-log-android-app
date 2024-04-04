@@ -1,5 +1,6 @@
 package me.chandankumar.workouttracker.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -8,8 +9,10 @@ import androidx.room.Update;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import me.chandankumar.workouttracker.domain.RepInfo;
+import me.chandankumar.workouttracker.domain.RepInfoHistory;
 import me.chandankumar.workouttracker.domain.TotalVolume;
 
 @Dao
@@ -36,12 +39,9 @@ public interface RepInfoDao {
     @Query("SELECT *  FROM RepInfo WHERE exerciseId=:exerciseId AND date BETWEEN :startDate AND :endDate GROUP BY date")
     List<RepInfo> getExerciseFromDateToDate(int exerciseId, Date startDate, Date endDate);
 
-    @Query("SELECT * FROM RepInfo WHERE exerciseId=:exerciseId AND date=(SELECT MAX(date) from RepInfo)")
+    @Query("SELECT * FROM RepInfo  WHERE exerciseId=:exerciseId AND date IN (SELECT DISTINCT(date) from RepInfo ORDER BY date DESC LIMIT 3)")
     List<RepInfo> getLastPerformedExercise(int exerciseId);
 
-
-    @Query("SELECT SUM(rep * weight) as totalVolume FROM RepInfo WHERE exerciseId=:exerciseId AND date=(SELECT MAX(date) from RepInfo)")
-    TotalVolume getTotalVolumeOfLastPerformedExercise(int exerciseId);
 
     @Insert
     void save(RepInfo repInfo);

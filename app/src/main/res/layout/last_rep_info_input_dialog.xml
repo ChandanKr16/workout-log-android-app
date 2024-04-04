@@ -16,13 +16,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 
-    <TextView
-        android:paddingLeft="8dp"
-        android:id="@+id/total_volume_info_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Total Volume: No data available"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+<!--    <TextView-->
+<!--        android:paddingLeft="8dp"-->
+<!--        android:id="@+id/total_volume_info_textview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Total Volume: No data available"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Small" />-->
 
 
 

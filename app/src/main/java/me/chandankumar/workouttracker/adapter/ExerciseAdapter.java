@@ -4,6 +4,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +14,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import me.chandankumar.workouttracker.R;
 import me.chandankumar.workouttracker.database.AppExecutors;
 import me.chandankumar.workouttracker.database.WorkoutDatabase;
 import me.chandankumar.workouttracker.domain.Exercise;
 import me.chandankumar.workouttracker.domain.RepInfo;
-import me.chandankumar.workouttracker.domain.TotalVolume;
 import me.chandankumar.workouttracker.ui.RepInfoActivity;
 import me.chandankumar.workouttracker.utils.AlertDialogBuilder;
 import me.chandankumar.workouttracker.utils.Constants;
@@ -61,6 +65,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.exerciseNameTextView.setText(exerciseList.get(position).getExerciseName());
@@ -142,9 +147,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
             View viewInflated = LayoutInflater.from(activity.getApplicationContext()).inflate(R.layout.last_rep_info_input_dialog, null , false);
 
             final TextView repInfoTextView = viewInflated.findViewById(R.id.rep_info_textview);
-            final TextView totalVolumeTextView = viewInflated.findViewById(R.id.total_volume_info_textview);
-
-
 
 
             AlertDialog alertDialog = new MaterialAlertDialogBuilder(activity)
@@ -158,14 +160,14 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
             AppExecutors.getInstance().diskIO().execute(() -> {
                 List<RepInfo> reps = workoutDatabase.repInfoDao().getLastPerformedExercise(exerciseId);
-                TotalVolume totalVolume = workoutDatabase.repInfoDao().getTotalVolumeOfLastPerformedExercise(exerciseId);
+
 
                 activity.runOnUiThread(() ->{
 
-                    if(reps.isEmpty()) return;
-                    alertDialog.setTitle("Last Rep Info - " + Utils.constructDate(reps.get(0).getDate()));
-                    repInfoTextView.setText(constructRepInfoData(reps));
-                    totalVolumeTextView.setText("Total Volume: " + totalVolume.getTotalVolume() + " Kg");
+                    if(!reps.isEmpty()) {
+                        alertDialog.setTitle("Last Few Rep Info");
+                        repInfoTextView.setText(constructRepInfoData(reps));
+                    }
 
                 });
 
@@ -183,14 +185,30 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private static String constructRepInfoData(List<RepInfo> reps){
         StringBuilder stringBuilder = new StringBuilder();
-        for(RepInfo repInfo : reps){
-            stringBuilder.append(repInfo.getRep());
-            stringBuilder.append(" × ");
-            stringBuilder.append(repInfo.getWeight());
-            stringBuilder.append(" Kg\n");
+
+        Map<Date, List<RepInfo>> repInfoByDate = reps.stream().collect(Collectors.groupingBy(RepInfo::getDate));
+
+        String rowFormat = "%12s %3d  %1s  %4.2f  %2s %n";
+
+        for(Map.Entry<Date, List<RepInfo>> list : repInfoByDate.entrySet()){
+
+            for (RepInfo repInfo : list.getValue()) {
+
+                stringBuilder.append(String.format(rowFormat, Utils.constructDate(list.getKey()), repInfo.getRep(), "x", repInfo.getWeight(), "Kg" ));
+
+            }
+
+            stringBuilder.append("----------------------------------------------\n");
+
         }
+
+
+
+
+
 
         return stringBuilder.toString();
     }
